@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqsgsg05othu3"]
+
+[ext_resource type="PackedScene" uid="uid://cp66ortydxrup" path="res://Scenes/GameController/game_controller.tscn" id="1_5j83b"]
+[ext_resource type="PackedScene" uid="uid://b7sg6lhng64lp" path="res://Scenes/Player/player.tscn" id="2_4cx05"]
+
+[node name="Main" type="Node2D"]
+
+[node name="GameController" parent="." instance=ExtResource("1_5j83b")]
+
+[node name="Player" parent="." instance=ExtResource("2_4cx05")]
+
+[node name="Player2" parent="." instance=ExtResource("2_4cx05")]
+
+[node name="Player3" parent="." instance=ExtResource("2_4cx05")]
+
+[node name="Player4" parent="." instance=ExtResource("2_4cx05")]
