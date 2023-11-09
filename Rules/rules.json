@@ -1,0 +1,19 @@
+[{
+    "round":1,
+    "description": "This round the players are given 7 cards from the deck. The goal of the round is to play two sets.",
+    "round_name": "Two Sets",
+    "number_of_cards": 7
+},
+{
+    "round":2,
+    "description": "This round the players are given 7 cards from the deck. The goal of the round is to play two sets.",
+    "round_name": "One Set One Run",
+    "number_of_cards": 8
+},
+{
+    "round":3,
+    "description": "This round the players are given 7 cards from the deck. The goal of the round is to play two sets.",
+    "round_name": "Two Run",
+    "number_of_cards": 9
+}
+]
