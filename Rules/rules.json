@@ -6,14 +6,44 @@
 },
 {
     "round":2,
-    "description": "This round the players are given 7 cards from the deck. The goal of the round is to play two sets.",
+    "description": "This round the players are given 8 cards from the deck. The goal of the round is to play one set and one run.",
     "round_name": "One Set One Run",
     "number_of_cards": 8
 },
 {
     "round":3,
-    "description": "This round the players are given 7 cards from the deck. The goal of the round is to play two sets.",
+    "description": "This round the players are given 9 cards from the deck. The goal of the round is to play two runs.",
     "round_name": "Two Run",
     "number_of_cards": 9
+},
+{
+    "round":4,
+    "description": "This round the players are given 10 cards from the deck. The goal of the round is to play three sets.",
+    "round_name": "Three Sets",
+    "number_of_cards": 10
+},
+{
+    "round":5,
+    "description": "This round the players are given 11 cards from the deck. The goal of the round is to play one run that is 7 cards long and one set.",
+    "round_name": "First 11 - Run of 7 and One Set",
+    "number_of_cards": 11
+},
+{
+    "round":6,
+    "description": "This round the players are given 11 cards from the deck. The goal of the round is to play two sets and one run.",
+    "round_name": "Second 11 - Two Sets and One Run",
+    "number_of_cards": 11
+},
+{
+    "round":7,
+    "description": "This round the players are given 12 cards from the deck. The goal of the round is to play two sets and one run.",
+    "round_name": "Two Runs and One Set",
+    "number_of_cards": 12
+},
+{
+    "round":8,
+    "description": "This round the players are given 13 cards from the deck. The goal of the round is to play three runs at once without discarding.",
+    "round_name": "Final Round. Three Runs. No Discard",
+    "number_of_cards": 13
 }
 ]
