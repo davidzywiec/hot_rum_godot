@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq03h23u2qvym"]
+
+[ext_resource type="Script" path="res://Scenes/UIController/ui_controller.gd" id="1_hawa8"]
+
+[node name="UIController" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_hawa8")
+
+[node name="LongRuleText" type="RichTextLabel" parent="."]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 279.0
+offset_bottom = 36.0
+grow_horizontal = 2
+text = "LONG RULE TEXT"
+fit_content = true
+tab_size = 1
+text_direction = 1

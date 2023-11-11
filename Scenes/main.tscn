@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqsgsg05othu3"]
+[gd_scene load_steps=4 format=3 uid="uid://cqsgsg05othu3"]
 
 [ext_resource type="PackedScene" uid="uid://cp66ortydxrup" path="res://Scenes/GameController/game_controller.tscn" id="1_5j83b"]
 [ext_resource type="PackedScene" uid="uid://b7sg6lhng64lp" path="res://Scenes/Player/player.tscn" id="2_4cx05"]
+[ext_resource type="PackedScene" uid="uid://cq03h23u2qvym" path="res://Scenes/UIController/ui_controller.tscn" id="3_dbdis"]
 
 [node name="Main" type="Node2D"]
 
 [node name="GameController" parent="." instance=ExtResource("1_5j83b")]
+
+[node name="UIController" parent="GameController" instance=ExtResource("3_dbdis")]
 
 [node name="Player" parent="." instance=ExtResource("2_4cx05")]
 
