@@ -6,9 +6,14 @@
 
 [node name="Main" type="Node2D"]
 
-[node name="GameController" parent="." instance=ExtResource("1_5j83b")]
+[node name="UIController" parent="." instance=ExtResource("3_dbdis")]
+offset_left = 446.0
+offset_top = 253.0
+offset_right = 446.0
+offset_bottom = 253.0
+size_flags_horizontal = 4
 
-[node name="UIController" parent="GameController" instance=ExtResource("3_dbdis")]
+[node name="GameController" parent="." instance=ExtResource("1_5j83b")]
 
 [node name="Player" parent="." instance=ExtResource("2_4cx05")]
 
