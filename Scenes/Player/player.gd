@@ -1,6 +1,7 @@
 extends Node
 
 var hand : Hand = null
+var card_scene : PackedScene = preload("res://Scenes/Card/card.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +13,7 @@ func _process(delta):
 	pass
 
 func print_hand():
-	print(self.name)
 	for card in hand.card_array:
-		print(card)
+		var card_node = card_scene.instantiate() as Sprite2D
+		card_node.texture = "res://Card Assets/1C.png"
+		

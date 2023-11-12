@@ -5,6 +5,7 @@ enum Suit {spades, hearts, diamonds, clubs};
 var number : int
 var suit : Suit
 
+
 func _init(number : int, suit : Suit):
 	self.number = number
 	self.suit = suit

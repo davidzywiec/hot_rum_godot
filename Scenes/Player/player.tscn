@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7sg6lhng64lp"]
+[gd_scene load_steps=3 format=3 uid="uid://b7sg6lhng64lp"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_sf5t6"]
+[ext_resource type="Texture2D" uid="uid://br2scotpxomsl" path="res://Card Assets/1C.png" id="2_74r74"]
 
-[node name="Player" type="Node" groups=["Player"]]
+[node name="Player" type="Node2D" groups=["Player"]]
 script = ExtResource("1_sf5t6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7.62939e-06, -1)
+scale = Vector2(1.101, 1)
+texture = ExtResource("2_74r74")
