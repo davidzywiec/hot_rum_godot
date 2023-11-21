@@ -6,16 +6,17 @@
 
 [node name="Main" type="Node2D"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(959, 530)
+
+[node name="UIController" parent="." groups=["UIController"] instance=ExtResource("3_dbdis")]
+size_flags_horizontal = 4
+
 [node name="GameController" parent="." instance=ExtResource("1_5j83b")]
 
 [node name="Player" parent="." instance=ExtResource("2_4cx05")]
-position = Vector2(-91, -2)
+position = Vector2(-824, -459)
+is_player = true
 
-[node name="UIController" parent="." instance=ExtResource("3_dbdis")]
-offset_left = 10.0
-offset_top = 60.0
-offset_right = 10.0
-offset_bottom = 60.0
-size_flags_horizontal = 4
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Player2" parent="." instance=ExtResource("2_4cx05")]
+position = Vector2(738, -456)

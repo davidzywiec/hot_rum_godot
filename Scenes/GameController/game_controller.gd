@@ -35,4 +35,5 @@ func deal_cards_to_players():
 	for player in players:
 		player.hand = deck.deal_hand(round_card_number[round_index])
 		player_count += 1
-		player.print_hand()
+		if player.is_player:
+			player.add_to_ui()

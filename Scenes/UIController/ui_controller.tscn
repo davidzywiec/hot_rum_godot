@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq03h23u2qvym"]
+[gd_scene load_steps=3 format=3 uid="uid://cq03h23u2qvym"]
 
 [ext_resource type="Script" path="res://Scenes/UIController/ui_controller.gd" id="1_hawa8"]
+[ext_resource type="Theme" uid="uid://b7oei08fdqkj2" path="res://Scenes/Theme/theme.tres" id="2_cx87y"]
 
 [node name="UIController" type="Control"]
 layout_mode = 3
@@ -9,24 +10,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_cx87y")
 script = ExtResource("1_hawa8")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="LongRuleText" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Press the Start Game to begin."
+
+[node name="StartButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-
-[node name="LongRuleText" type="Label" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Testing"
-
-[node name="StartButton" type="Button" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
+theme = ExtResource("2_cx87y")
 text = "Start Game"
+icon_alignment = 1
+
+[node name="CardArea" type="GridContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/CardArea"]
+layout_mode = 2

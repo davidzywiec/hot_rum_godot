@@ -35,3 +35,30 @@ func _to_string():
 		_:
 			card_num = str(number)
 	return card_num + " of " + suit_str
+
+func get_card_resource():
+	var suit_str : String
+	var card_num : String
+	match suit:
+		Suit.spades:
+			suit_str = "S"
+		Suit.hearts:
+			suit_str = "H"
+		Suit.diamonds:
+			suit_str = "D"
+		Suit.clubs:
+			suit_str = "C"
+	
+	match number:
+		1:
+			card_num = "Ace"
+		11:
+			card_num = "Jack"
+		12: 
+			card_num = "Queen"
+		13:
+			card_num = "King"
+		_:
+			card_num = str(number)
+			
+	return "res://Card Assets/" + card_num + suit_str + ".png"

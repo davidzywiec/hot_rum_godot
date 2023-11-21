@@ -1,7 +1,9 @@
 extends Node
 
+@export var is_player : bool = false
 var hand : Hand = null
 var card_scene : PackedScene = preload("res://Scenes/Card/card.tscn")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,8 +14,7 @@ func _ready():
 func _process(delta):
 	pass
 
-func print_hand():
-	for card in hand.card_array:
-		var card_node = card_scene.instantiate() as Sprite2D
-		card_node.texture = "res://Card Assets/1C.png"
-		
+func add_to_ui():
+	var ui = get_tree().get_first_node_in_group("UIController")
+	if ui.has_method("add_cards_to_hand"):
+			ui.add_cards_to_hand(hand.card_array)
