@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ceeou4j5ku5fl"]
+
+[ext_resource type="Shader" path="res://Shaders/select_shader.gdshader" id="1_abpli"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_abpli")
+shader_parameter/outline_color = Color(0.145098, 0.0901961, 0.858824, 1)
+shader_parameter/apply_outline = false

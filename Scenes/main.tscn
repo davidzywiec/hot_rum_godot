@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqsgsg05othu3"]
+[gd_scene load_steps=7 format=3 uid="uid://cqsgsg05othu3"]
 
 [ext_resource type="PackedScene" uid="uid://cp66ortydxrup" path="res://Scenes/GameController/game_controller.tscn" id="1_5j83b"]
 [ext_resource type="PackedScene" uid="uid://b7sg6lhng64lp" path="res://Scenes/Player/player.tscn" id="2_4cx05"]
 [ext_resource type="PackedScene" uid="uid://cq03h23u2qvym" path="res://Scenes/UIController/ui_controller.tscn" id="3_dbdis"]
+[ext_resource type="Texture2D" uid="uid://jxhr1gp2ue3a" path="res://Card Assets/backR.png" id="3_thi2y"]
+[ext_resource type="Texture2D" uid="uid://cwhpjhho1wqm6" path="res://Card Assets/backB.png" id="4_fu3xk"]
+[ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="6_bbmmr"]
 
 [node name="Main" type="Node2D"]
 
@@ -13,10 +16,19 @@ position = Vector2(959, 530)
 size_flags_horizontal = 4
 
 [node name="GameController" parent="." instance=ExtResource("1_5j83b")]
+position = Vector2(-905, 86)
+default_card = ExtResource("3_thi2y")
 
 [node name="Player" parent="." instance=ExtResource("2_4cx05")]
-position = Vector2(-824, -459)
+position = Vector2(931, 395)
 is_player = true
 
 [node name="Player2" parent="." instance=ExtResource("2_4cx05")]
 position = Vector2(738, -456)
+
+[node name="Deck Area" type="Node2D" parent="." groups=["Deck Area"]]
+position = Vector2(807, 464)
+
+[node name="DiscardCard" type="Sprite2D" parent="Deck Area" groups=["Discard Card"]]
+material = ExtResource("6_bbmmr")
+texture = ExtResource("4_fu3xk")

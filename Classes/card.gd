@@ -38,7 +38,6 @@ func _to_string():
 
 func get_card_resource():
 	var suit_str : String
-	var card_num : String
 	match suit:
 		Suit.spades:
 			suit_str = "S"
@@ -49,16 +48,6 @@ func get_card_resource():
 		Suit.clubs:
 			suit_str = "C"
 	
-	match number:
-		1:
-			card_num = "Ace"
-		11:
-			card_num = "Jack"
-		12: 
-			card_num = "Queen"
-		13:
-			card_num = "King"
-		_:
-			card_num = str(number)
+	
 			
-	return "res://Card Assets/" + card_num + suit_str + ".png"
+	return "res://Card Assets/" + str(number) + suit_str + ".png"

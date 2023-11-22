@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7sg6lhng64lp"]
+[gd_scene load_steps=5 format=3 uid="uid://b7sg6lhng64lp"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_sf5t6"]
-[ext_resource type="Texture2D" uid="uid://br2scotpxomsl" path="res://Card Assets/1C.png" id="2_74r74"]
+[ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="2_mql4r"]
+[ext_resource type="Texture2D" uid="uid://cwbhdpbma8um4" path="res://icon.svg" id="3_hltib"]
+[ext_resource type="Script" path="res://Scenes/test.gd" id="4_vl826"]
 
 [node name="Player" type="Node2D" groups=["Player"]]
 script = ExtResource("1_sf5t6")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(7.62939e-06, -1)
-scale = Vector2(1.101, 1)
-texture = ExtResource("2_74r74")
+[node name="CardArea" type="Node2D" parent="."]
+position = Vector2(29, 505)
+
+[node name="Icon" type="Sprite2D" parent="."]
+material = ExtResource("2_mql4r")
+position = Vector2(697, 700)
+texture = ExtResource("3_hltib")
+script = ExtResource("4_vl826")

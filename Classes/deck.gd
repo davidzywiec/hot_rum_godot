@@ -31,3 +31,6 @@ func deal_hand(card_cnt: int)->Hand:
 	for x in range(card_cnt):
 		new_hand.append(cards.pop_front())
 	return Hand.new(new_hand)
+
+func deal_card()->Card:
+	return cards.pop_front()
