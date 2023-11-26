@@ -1,24 +1,18 @@
 class_name GamePhase
  # @brief The GamePhase class is an abstract class that represents a phase of the game.
 
-# There are 4 phases in the game to the player.
-# 1. Player is waiting for their turn
-# 2. Player is choosing to pick up a card from the deck or pick up the top card from the discard pile
-# 3.	
-#	A. Player is choosing to place cards down on the table
-# 	B. Player is choosing to discard a card from their hand 
-# 4. Player has no cards left. Game Over OR player has ended their turn by discarding.
 
 enum game_phase
-{	Next,
-	Waiting,
-	Choosing,
-	Placing,
-	Discarding
+{	NewGame,
+	NewRound,
+	Playing,
+	Tallying,
+	Pause,
+	GameOver
 };
-var game_phase_labels = ["Next", "Waiting", "Choosing", "Placing", "Discarding"]
-
-var current_phase : game_phase = game_phase.Waiting 
+var game_phase_labels = ["New Round", "Playing Round", "Tallying Score", "Paused Game", "Game Over"]
+var round_number = -1
+var current_phase : game_phase = game_phase.NewGame 
 #Get the current phase of the game
 func get_phase():
 	return current_phase
@@ -30,18 +24,23 @@ func get_phase_label():
 #Override the phase of the game
 func set_phase(new_phase : game_phase):
 	current_phase = new_phase
+	if new_phase == game_phase.NewRound:
+		round_number+=1
 
 #Go to the next phase of the game
 func next_phase():
 	match current_phase:
-		game_phase.Waiting:
-			current_phase = game_phase.Choosing
-		game_phase.Choosing:
-			current_phase = game_phase.Placing
-		game_phase.Placing:
-			current_phase = game_phase.Discarding
-		game_phase.Discarding:
-			current_phase = game_phase.Waiting
+		game_phase.NewGame:
+			set_phase(game_phase.NewRound)
+		game_phase.NewRound:
+			set_phase(game_phase.Playing)
+		game_phase.Playing:
+			set_phase(game_phase.Tallying)
+		game_phase.Tallying:
+			if round_number == 7:
+				set_phase(game_phase.GameOver)
+			else:
+				set_phase(game_phase.NewRound)
 		_:
 			print("Error: Invalid game phase")
-			current_phase = game_phase.Waiting
+			set_phase(game_phase.Pause)

@@ -20,11 +20,12 @@ position = Vector2(-905, 86)
 default_card = ExtResource("3_thi2y")
 
 [node name="Player" parent="." instance=ExtResource("2_4cx05")]
-position = Vector2(931, 395)
+position = Vector2(769, 653)
 is_player = true
 
 [node name="Player2" parent="." instance=ExtResource("2_4cx05")]
-position = Vector2(738, -456)
+visible = false
+position = Vector2(1168, 163)
 
 [node name="Deck Area" type="Node2D" parent="." groups=["Deck Area"]]
 position = Vector2(807, 464)

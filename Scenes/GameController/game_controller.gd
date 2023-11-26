@@ -26,6 +26,7 @@ func _ready():
 	game_ui.pick_card_signal.connect(pick_card)
 	game_ui.pass_card_signal.connect(pass_card)
 	game_ui.take_card_signal.connect(take_card)
+	game_ui.discard_card_signal.connect(try_discard)
 
 func start_game():
 	#Display the rules to the user for the round.
@@ -76,7 +77,6 @@ func pass_card():
 	#next_player()
 	var material = discard_card.material as ShaderMaterial
 	material.set_shader_parameter("apply_outline", true)
-	print(material.get_shader_parameter("apply_outline"))
 		
 
 func take_card():
@@ -85,6 +85,8 @@ func take_card():
 	set_discard_card(null)
 	send_player_card(drawn_card)
 
+func try_discard():
+	print("Discard card")
 
 #Send the player the current card.
 func send_player_card(card :Card):
@@ -111,5 +113,4 @@ func print_discard_pile():
 	print("Discard Pile: " + str(discard_pile.size()) + " cards")
 	for card in discard_pile:
 		print(card)
-		
-
+	

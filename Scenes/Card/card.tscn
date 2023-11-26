@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://tdwxkqtswnnj"]
+[gd_scene load_steps=3 format=3 uid="uid://tdwxkqtswnnj"]
 
 [ext_resource type="Script" path="res://Scenes/Card/card_sprite_controller.gd" id="1_7rjjv"]
+[ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="1_xloae"]
 
 [node name="Card2D" type="Sprite2D"]
+material = ExtResource("1_xloae")
 script = ExtResource("1_7rjjv")
