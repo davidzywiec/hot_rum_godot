@@ -1,15 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7sg6lhng64lp"]
+[gd_scene load_steps=6 format=3 uid="uid://b7sg6lhng64lp"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_sf5t6"]
+[ext_resource type="Script" path="res://Scenes/Player/CardArea.gd" id="2_jkmuf"]
 [ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="2_mql4r"]
 [ext_resource type="Texture2D" uid="uid://cwbhdpbma8um4" path="res://icon.svg" id="3_hltib"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3m0y"]
 
 [node name="Player" type="Node2D" groups=["Player"]]
 script = ExtResource("1_sf5t6")
 
 [node name="CardArea" type="Node2D" parent="."]
-position = Vector2(0, 150)
+script = ExtResource("2_jkmuf")
+
+[node name="PlayingArea2D" type="Area2D" parent="CardArea"]
+modulate = Color(1, 0.403922, 1, 1)
+
+[node name="PlayerAreaShape2D" type="CollisionShape2D" parent="CardArea/PlayingArea2D"]
+shape = SubResource("RectangleShape2D_u3m0y")
+
+[node name="Polygon2D" type="Polygon2D" parent="CardArea"]
+position = Vector2(960, 0)
+polygon = PackedVector2Array(0, 0, 1895, 0, 1895, 520, 0, 520)
 
 [node name="Icon" type="Sprite2D" parent="."]
+visible = false
 material = ExtResource("2_mql4r")
 texture = ExtResource("3_hltib")
