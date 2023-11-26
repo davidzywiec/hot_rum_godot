@@ -1,7 +1,7 @@
 class_name Rules_Manager
 
 var rules_array = []
-var current_rule = 0
+
 
 func _init():
 	#Load all of the rules from Rules/rules.json  
@@ -20,5 +20,5 @@ func _init():
 			var new_rule = Rule.new(rule["round"], rule["description"],rule["round_name"],rule["number_of_cards"])
 			rules_array.append(new_rule)
 
-func get_current_rule()->String:
-	return rules_array[current_rule]["description"]
+func get_current_rule(rule_index : int)->String:
+	return rules_array[rule_index]["description"]

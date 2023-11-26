@@ -12,20 +12,14 @@
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(959, 530)
 
-[node name="UIController" parent="." groups=["UIController"] instance=ExtResource("3_dbdis")]
-size_flags_horizontal = 4
+[node name="Controllers" type="Node2D" parent="."]
 
-[node name="GameController" parent="." instance=ExtResource("1_5j83b")]
+[node name="GameController" parent="Controllers" instance=ExtResource("1_5j83b")]
 position = Vector2(-905, 86)
 default_card = ExtResource("3_thi2y")
 
-[node name="Player" parent="." instance=ExtResource("2_4cx05")]
-position = Vector2(769, 653)
-is_player = true
-
-[node name="Player2" parent="." instance=ExtResource("2_4cx05")]
-visible = false
-position = Vector2(1168, 163)
+[node name="UIController" parent="Controllers" groups=["UIController"] instance=ExtResource("3_dbdis")]
+size_flags_horizontal = 4
 
 [node name="Deck Area" type="Node2D" parent="." groups=["Deck Area"]]
 position = Vector2(807, 464)
@@ -33,3 +27,32 @@ position = Vector2(807, 464)
 [node name="DiscardCard" type="Sprite2D" parent="Deck Area" groups=["Discard Card"]]
 material = ExtResource("6_bbmmr")
 texture = ExtResource("4_fu3xk")
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Player" parent="Players" instance=ExtResource("2_4cx05")]
+position = Vector2(769, 653)
+is_player = true
+
+[node name="Player2" parent="Players" instance=ExtResource("2_4cx05")]
+visible = false
+
+[node name="Player3" parent="Players" instance=ExtResource("2_4cx05")]
+visible = false
+
+[node name="Player4" parent="Players" instance=ExtResource("2_4cx05")]
+visible = false
+
+[node name="GamePhase" type="Label" parent="."]
+offset_left = 1734.0
+offset_top = 38.0
+offset_right = 1774.0
+offset_bottom = 61.0
+text = "Game Phase"
+
+[node name="PlayerPhase" type="Label" parent="."]
+offset_left = 1734.0
+offset_top = 109.0
+offset_right = 1774.0
+offset_bottom = 132.0
+text = "Player Phase"

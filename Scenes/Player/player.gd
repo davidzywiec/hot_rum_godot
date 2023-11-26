@@ -5,6 +5,7 @@ var hand : Hand = null
 var card_scene : PackedScene = preload("res://Scenes/Card/card.tscn")
 @onready var card_area = $CardArea
 var offset = 0
+var player_phase = playerPhase.new()
 
 
 # Called when the node enters the scene tree for the first time.

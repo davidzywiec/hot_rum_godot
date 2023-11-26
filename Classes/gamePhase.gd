@@ -10,9 +10,10 @@ enum game_phase
 	Pause,
 	GameOver
 };
-var game_phase_labels = ["New Round", "Playing Round", "Tallying Score", "Paused Game", "Game Over"]
+var game_phase_labels = ["New Game", "New Round", "Playing", "Tallying Score","Paused Game", "Game Over"]
 var round_number = -1
-var current_phase : game_phase = game_phase.NewGame 
+var current_phase : game_phase = game_phase.NewGame
+
 #Get the current phase of the game
 func get_phase():
 	return current_phase
