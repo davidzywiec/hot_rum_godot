@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqsgsg05othu3"]
+[gd_scene load_steps=8 format=3 uid="uid://cqsgsg05othu3"]
 
 [ext_resource type="PackedScene" uid="uid://cp66ortydxrup" path="res://Scenes/GameController/game_controller.tscn" id="1_5j83b"]
 [ext_resource type="PackedScene" uid="uid://b7sg6lhng64lp" path="res://Scenes/Player/player.tscn" id="2_4cx05"]
@@ -6,11 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://jxhr1gp2ue3a" path="res://Card Assets/backR.png" id="3_thi2y"]
 [ext_resource type="Texture2D" uid="uid://cwhpjhho1wqm6" path="res://Card Assets/backB.png" id="4_fu3xk"]
 [ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="6_bbmmr"]
+[ext_resource type="Texture2D" uid="uid://58gv2y2mausi" path="res://Card Assets/CardArea/card_area_sprite.png" id="7_4l4au"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(959, 530)
+
+[node name="CardAreaSprite" type="Sprite2D" parent="."]
+position = Vector2(960, 832)
+texture = ExtResource("7_4l4au")
 
 [node name="Controllers" type="Node2D" parent="."]
 
@@ -31,7 +36,7 @@ texture = ExtResource("4_fu3xk")
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Player" parent="Players" instance=ExtResource("2_4cx05")]
-position = Vector2(1136, 768)
+position = Vector2(1135, 836)
 scale = Vector2(1.16, 1)
 is_player = true
 
