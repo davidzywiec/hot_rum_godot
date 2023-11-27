@@ -7,10 +7,6 @@ var is_highlighted = false
 func _ready():
 	var sprite = self  # Replace with your sprite node path
 	var material = sprite.material
-	if material is ShaderMaterial:
-		print("Shader is applied. Shader code: ", material.shader.code)
-	else:
-		print("Shader is not applied.")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
