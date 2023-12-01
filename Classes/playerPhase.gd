@@ -3,10 +3,12 @@ class_name playerPhase
 enum player_phase
 {	Waiting,
 	Choosing,
+	Thinking,
 	Placing,
-	Discarding
+	Discarding,
+	RoundOver
 };
-var player_phase_labels = ["Waiting", "Choosing", "Placing", "Discarding"]
+var player_phase_labels = ["Waiting", "Choosing", "Thinking","Placing", "Discarding","Round Over"]
 var current_phase : player_phase = player_phase.Waiting 
 
 func get_phase():
@@ -18,3 +20,6 @@ func get_phase_label():
 
 func set_phase(new_phase : player_phase):
 	current_phase = new_phase
+
+func phase_to_string(enum_value : player_phase):
+	return player_phase_labels[enum_value]
