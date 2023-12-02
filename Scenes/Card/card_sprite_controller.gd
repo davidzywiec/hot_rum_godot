@@ -13,10 +13,11 @@ func _ready():
 func _process(delta):
 	pass
 
-func _input(event):
-	if event is InputEventMouseButton and event.pressed:		
-		if get_rect().has_point(to_local(event.position)):
-			select_card()
+#func _input(event):
+	#pass
+	#if event is InputEventMouseButton and event.pressed:		
+		#f get_rect().has_point(to_local(event.position)):
+			#select_card()
 
 
 func set_shader_param(new_bool : bool):

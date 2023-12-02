@@ -40,13 +40,13 @@ func get_card_resource():
 	var suit_str : String
 	match suit:
 		Suit.spades:
-			suit_str = "S"
+			suit_str = ".5"
 		Suit.hearts:
-			suit_str = "H"
+			suit_str = ".2"
 		Suit.diamonds:
-			suit_str = "D"
+			suit_str = ".4"
 		Suit.clubs:
-			suit_str = "C"
+			suit_str = ".7"
 	
 	
 			

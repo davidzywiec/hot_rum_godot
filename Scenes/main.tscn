@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://cp66ortydxrup" path="res://Scenes/GameController/game_controller.tscn" id="1_5j83b"]
 [ext_resource type="PackedScene" uid="uid://b7sg6lhng64lp" path="res://Scenes/Player/player.tscn" id="2_4cx05"]
 [ext_resource type="PackedScene" uid="uid://cq03h23u2qvym" path="res://Scenes/UIController/ui_controller.tscn" id="3_dbdis"]
-[ext_resource type="Texture2D" uid="uid://jxhr1gp2ue3a" path="res://Card Assets/backR.png" id="3_thi2y"]
-[ext_resource type="Texture2D" uid="uid://cwhpjhho1wqm6" path="res://Card Assets/backB.png" id="4_fu3xk"]
+[ext_resource type="Texture2D" uid="uid://surnkyvlb4sy" path="res://Back1.png" id="5_w50r6"]
 [ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="6_bbmmr"]
 [ext_resource type="Texture2D" uid="uid://58gv2y2mausi" path="res://Card Assets/CardArea/card_area_sprite.png" id="7_4l4au"]
+[ext_resource type="Script" path="res://Scenes/ClickController.gd" id="7_sot4x"]
 
 [node name="Main" type="Node2D"]
 
@@ -21,22 +21,23 @@ texture = ExtResource("7_4l4au")
 
 [node name="GameController" parent="Controllers" instance=ExtResource("1_5j83b")]
 position = Vector2(-905, 86)
-default_card = ExtResource("3_thi2y")
+default_card = ExtResource("5_w50r6")
 
 [node name="UIController" parent="Controllers" groups=["UIController"] instance=ExtResource("3_dbdis")]
 size_flags_horizontal = 4
 
 [node name="Deck Area" type="Node2D" parent="." groups=["Deck Area"]]
-position = Vector2(807, 464)
+position = Vector2(1296, 337)
 
 [node name="DiscardCard" type="Sprite2D" parent="Deck Area" groups=["Discard Card"]]
 material = ExtResource("6_bbmmr")
-texture = ExtResource("4_fu3xk")
+scale = Vector2(3, 3)
+texture = ExtResource("5_w50r6")
 
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Player" parent="Players" instance=ExtResource("2_4cx05")]
-position = Vector2(1135, 836)
+position = Vector2(922, 836)
 scale = Vector2(1.16, 1)
 is_player = true
 
@@ -62,3 +63,7 @@ offset_top = 109.0
 offset_right = 1774.0
 offset_bottom = 132.0
 text = "Player Phase"
+
+[node name="ClickController" type="Node2D" parent="."]
+position = Vector2(0.000366211, 0)
+script = ExtResource("7_sot4x")

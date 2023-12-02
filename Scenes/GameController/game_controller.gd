@@ -6,7 +6,7 @@ extends Node2D
 @onready var game_ui := $"../UIController"
 @onready var deck_area = get_tree().get_first_node_in_group("Deck Area") as Node2D
 @onready var discard_card = get_tree().get_first_node_in_group("Discard Card") as Sprite2D
-@export var default_card : Texture2D 
+@export var default_card : Texture2D
 
 #Round Controller
 @onready var roundControllerScene = preload("res://Scenes/GameController/round_controller.tscn")

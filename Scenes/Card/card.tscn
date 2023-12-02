@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scenes/Card/card_sprite_controller.gd" id="1_7rjjv"]
 [ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="1_xloae"]
-[ext_resource type="Texture2D" uid="uid://cwhpjhho1wqm6" path="res://Card Assets/backB.png" id="2_uyuv5"]
+[ext_resource type="Texture2D" uid="uid://surnkyvlb4sy" path="res://Back1.png" id="2_dt17l"]
 
-[node name="Card2D" type="Sprite2D"]
+[node name="Card2D" type="Sprite2D" groups=["selectable_card"]]
 material = ExtResource("1_xloae")
-texture = ExtResource("2_uyuv5")
+texture = ExtResource("2_dt17l")
 script = ExtResource("1_7rjjv")

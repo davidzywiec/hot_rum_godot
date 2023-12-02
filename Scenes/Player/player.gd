@@ -3,16 +3,15 @@ extends Node2D
 @export var is_player : bool = false
 var hand : Hand = null
 var card_scene : PackedScene = preload("res://Scenes/Card/card.tscn")
-@onready var card_area : CollisionShape2D = $CardArea/PlayingArea2D/PlayerAreaShape2D
 var screen_size : Vector2 = Vector2.ZERO
 var offset = 0
 var player_phase = playerPhase.new()
 var current_row = 0
 var current_col = 0
-var max_row = 1
-var max_col = 1
+var current_z_index :int = 1
+var max_col = 20
 
-var gridSpacing = Vector2(68, 94)  # Adjust the spacing between sprites
+var gridSpacing = Vector2(70, 100)  # Adjust the spacing between sprites
 var gridSize = Vector2(20, 4)       # Adjust the number of rows and columns
 
 # Called when the node enters the scene tree for the first time.
@@ -21,8 +20,8 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+#func _process(delta):
+	#pass
 
 #Player receives a new car in hand
 func get_new_card(new_card : Card):
@@ -33,38 +32,37 @@ func get_new_card(new_card : Card):
 
 #Player adds cards to the UI
 func add_card_to_game(all_cards: bool):
-	test_add_cards_to_grid()
 	#Create an offset incrased for each card
 	if all_cards:
 		#For each card in the hand
 		for card in hand.card_array:
 			#Create an instance of the card
-			#add_card_to_grid(card)
-			pass
+			add_card_to_grid(card)
 	else:
 		#Create an instance of the card
-		var card_sprite = card_scene.instantiate()
-		card_sprite.texture = load(hand.card_array[hand.card_array.size()-1].get_card_resource())
-		card_sprite.position = Vector2(0,0)
-		card_sprite.position.x += offset
-		offset -= card_sprite.texture.get_width()
-		card_area.add_child(card_sprite)
+		var card = hand.card_array[hand.card_array.size()-1]
+		add_card_to_grid(card)
 
 
 #Move the card to the other slot 
 func add_card_to_grid(card : Card):
-	var card_sprite = card_scene.instantiate()
-	card_sprite.texture = load(card.get_card_resource())
-	card_sprite.position = Vector2(0,0)
-	card_sprite.position.x += offset
-	offset -= card_sprite.texture.get_width()
-	var position = Vector2(current_col * card_sprite.texture.get_size().x, current_row * card_sprite.texture.get_size().y)
-	print(position)
-	card_area.add_child(card_sprite)
+
+	var sprite : Sprite2D = card_scene.instantiate()
+	sprite.texture = load(card.get_card_resource())
+	var shape_width = Vector2(-778,-163)
+	var new_pos = Vector2((current_col * gridSpacing.x) + shape_width.x, (current_row * gridSpacing.y) + shape_width.y)
+	sprite.global_position = new_pos
+	add_child(sprite)
+	if current_col+1 > max_col:
+		current_row+=1
+		current_col = 1
+	else:
+		current_col+=1
+	
 
 func test_add_cards_to_grid():
 	var shape_width = Vector2(-778,-163)
-	print(shape_width)
+
 	for row in range(int(gridSize.y)):
 		for col in range(int(gridSize.x)):
 		# Create a new sprite
