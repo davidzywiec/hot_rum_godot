@@ -41,7 +41,7 @@ func start_game():
 
 func pick_card():
 	emit_signal("pick_card_signal")
-	pick_button.visible = false
+	#pick_button.visible = false
 
 
 func pass_card():
@@ -50,7 +50,7 @@ func pass_card():
 
 func take_card():
 	emit_signal("take_card_signal")
-	take_button.visible = false
+	#take_button.visible = false
 	
 
 func discard_card():

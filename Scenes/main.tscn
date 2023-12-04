@@ -67,8 +67,6 @@ offset_bottom = 132.0
 text = "Player Phase"
 
 [node name="CardArea" parent="." instance=ExtResource("6_2udjd")]
-custom_minimum_size = Vector2(200, 500)
-offset_left = 1.0
-offset_top = 363.0
-offset_right = 1921.0
-offset_bottom = 1443.0
+offset_top = 720.0
+offset_right = 1920.0
+offset_bottom = 1025.0

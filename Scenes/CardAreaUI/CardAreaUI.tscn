@@ -1,16 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0ojd1xt0v51j"]
+[gd_scene format=3 uid="uid://c0ojd1xt0v51j"]
 
-[ext_resource type="Texture2D" uid="uid://c0iy0xaafj1wq" path="res://Card Assets/1.1.png" id="1_s5rrp"]
-
-[node name="Control" type="ScrollContainer"]
-custom_minimum_size = Vector2(1920, 500)
+[node name="CardArea" type="ScrollContainer"]
+custom_minimum_size = Vector2(1920, 305)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -580.0
+offset_top = -3.0
+offset_bottom = -783.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.004, 1)
 size_flags_vertical = 4
+horizontal_scroll_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2
@@ -23,8 +24,3 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer" groups=["CardBox"]]
 layout_mode = 2
 theme_override_constants/separation = -50
-
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(204, 300)
-layout_mode = 2
-texture = ExtResource("1_s5rrp")
