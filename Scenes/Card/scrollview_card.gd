@@ -21,7 +21,12 @@ func _input(event):
 			scale = rect_scale
 
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if  event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
+			if rect.has_point(get_local_mouse_position()):
+				print("Double click selected: " + str(self.get_index()))
+				get_parent().move_child(self,2)
+			
+		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if rect.has_point(get_local_mouse_position()):
 				is_highlighted = false if is_highlighted else true
 				if is_highlighted:

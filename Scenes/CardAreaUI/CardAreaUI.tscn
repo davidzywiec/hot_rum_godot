@@ -1,9 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0ojd1xt0v51j"]
-
-[ext_resource type="PackedScene" uid="uid://dhbk06ekkcibq" path="res://Scenes/Card/scrollview_card.tscn" id="1_i061x"]
+[gd_scene format=3 uid="uid://c0ojd1xt0v51j"]
 
 [node name="CardArea" type="ScrollContainer"]
 custom_minimum_size = Vector2(1920, 305)
+layout_direction = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,7 +13,6 @@ offset_bottom = -787.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
-horizontal_scroll_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2
@@ -27,6 +25,3 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer" groups=["CardBox"]]
 layout_mode = 2
 theme_override_constants/separation = 0
-
-[node name="Card" parent="CenterContainer/MarginContainer/HBoxContainer" instance=ExtResource("1_i061x")]
-layout_mode = 2
