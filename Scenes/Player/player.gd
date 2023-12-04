@@ -11,8 +11,8 @@ var current_col = 0
 var current_z_index :int = 1
 var max_col = 20
 
-var gridSpacing = Vector2(70, 100)  # Adjust the spacing between sprites
-var gridSize = Vector2(20, 4)       # Adjust the number of rows and columns
+var gridSpacing = Vector2(5,5)  # Adjust the spacing between sprites
+var gridSize = Vector2(20, 2)       # Adjust the number of rows and columns
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,11 +46,11 @@ func add_card_to_game(all_cards: bool):
 
 #Move the card to the other slot 
 func add_card_to_grid(card : Card):
-
 	var sprite : Sprite2D = card_scene.instantiate()
 	sprite.texture = load(card.get_card_resource())
-	var shape_width = Vector2(-778,-163)
-	var new_pos = Vector2((current_col * gridSpacing.x) + shape_width.x, (current_row * gridSpacing.y) + shape_width.y)
+	var sprite_width = sprite.texture.get_width()*sprite.scale.x
+	var sprite_height = sprite.texture.get_height()*sprite.scale.y
+	var new_pos = Vector2((current_col * sprite_width ) + (gridSpacing.x * current_col), (current_row * sprite_height) + (gridSpacing.y * current_row))
 	sprite.global_position = new_pos
 	add_child(sprite)
 	if current_col+1 > max_col:
@@ -61,18 +61,19 @@ func add_card_to_grid(card : Card):
 	
 
 func test_add_cards_to_grid():
-	var shape_width = Vector2(-778,-163)
-
 	for row in range(int(gridSize.y)):
 		for col in range(int(gridSize.x)):
 		# Create a new sprite
 			var sprite = card_scene.instantiate()
+			var sprite_width = sprite.texture.get_width()*sprite.scale.x
+			var sprite_height = sprite.texture.get_height()*sprite.scale.y
 			# Set the sprite's texture or other properties as needed
 			# For example, you can set a default texture:
 			# sprite.texture = preload("res://path/to/your/texture.png")
 			# Calculate the position based on the grid spacing and current row/column
-			var new_pos = Vector2((col * gridSpacing.x) + shape_width.x, (row * gridSpacing.y) + shape_width.y)
+			var new_pos = Vector2((col * sprite_width ) + (gridSpacing.x * col), (row * sprite_height) + (gridSpacing.y * row))
 			# Set the sprite's position relative to the Area2D
 			sprite.position = new_pos
+			print(new_pos)
 			# Add the sprite as a child of the Area2D
 			add_child(sprite)

@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqsgsg05othu3"]
+[gd_scene load_steps=7 format=3 uid="uid://cqsgsg05othu3"]
 
 [ext_resource type="PackedScene" uid="uid://cp66ortydxrup" path="res://Scenes/GameController/game_controller.tscn" id="1_5j83b"]
 [ext_resource type="PackedScene" uid="uid://b7sg6lhng64lp" path="res://Scenes/Player/player.tscn" id="2_4cx05"]
 [ext_resource type="PackedScene" uid="uid://cq03h23u2qvym" path="res://Scenes/UIController/ui_controller.tscn" id="3_dbdis"]
-[ext_resource type="Texture2D" uid="uid://surnkyvlb4sy" path="res://Back1.png" id="5_w50r6"]
 [ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="6_bbmmr"]
 [ext_resource type="Texture2D" uid="uid://58gv2y2mausi" path="res://Card Assets/CardArea/card_area_sprite.png" id="7_4l4au"]
-[ext_resource type="Script" path="res://Scenes/ClickController.gd" id="7_sot4x"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dgq3o"]
+load_path = "res://.godot/imported/Back1.png-41131500a954b8857993c9292815c918.ctex"
 
 [node name="Main" type="Node2D"]
 
@@ -21,24 +22,23 @@ texture = ExtResource("7_4l4au")
 
 [node name="GameController" parent="Controllers" instance=ExtResource("1_5j83b")]
 position = Vector2(-905, 86)
-default_card = ExtResource("5_w50r6")
+default_card = SubResource("CompressedTexture2D_dgq3o")
 
 [node name="UIController" parent="Controllers" groups=["UIController"] instance=ExtResource("3_dbdis")]
 size_flags_horizontal = 4
 
 [node name="Deck Area" type="Node2D" parent="." groups=["Deck Area"]]
-position = Vector2(1296, 337)
+position = Vector2(960, 352)
 
 [node name="DiscardCard" type="Sprite2D" parent="Deck Area" groups=["Discard Card"]]
 material = ExtResource("6_bbmmr")
-scale = Vector2(3, 3)
-texture = ExtResource("5_w50r6")
+scale = Vector2(2, 2)
+texture = SubResource("CompressedTexture2D_dgq3o")
 
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Player" parent="Players" instance=ExtResource("2_4cx05")]
-position = Vector2(922, 836)
-scale = Vector2(1.16, 1)
+position = Vector2(123, 704)
 is_player = true
 
 [node name="Player2" parent="Players" instance=ExtResource("2_4cx05")]
@@ -63,7 +63,3 @@ offset_top = 109.0
 offset_right = 1774.0
 offset_bottom = 132.0
 text = "Player Phase"
-
-[node name="ClickController" type="Node2D" parent="."]
-position = Vector2(0.000366211, 0)
-script = ExtResource("7_sot4x")
