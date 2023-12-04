@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhbk06ekkcibq"]
+
+[ext_resource type="Texture2D" uid="uid://c0iy0xaafj1wq" path="res://Card Assets/1.1.png" id="1_sc84g"]
+[ext_resource type="Script" path="res://Scenes/Card/scrollview_card.gd" id="2_h0d7l"]
+
+[node name="Card" type="TextureRect"]
+custom_minimum_size = Vector2(204, 300)
+offset_top = -1.0
+offset_right = 204.0
+offset_bottom = 299.0
+focus_mode = 1
+texture = ExtResource("1_sc84g")
+script = ExtResource("2_h0d7l")

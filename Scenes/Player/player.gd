@@ -2,7 +2,7 @@ extends Node2D
 
 @export var is_player : bool = false
 var hand : Hand = null
-var card_scene : PackedScene = preload("res://Scenes/Card/card.tscn")
+var card_scene : PackedScene = preload("res://Scenes/Card/scrollview_card.tscn")
 var screen_size : Vector2 = Vector2.ZERO
 var offset = 0
 var player_phase = playerPhase.new()
@@ -83,7 +83,6 @@ func test_add_cards_to_grid():
 
 
 func add_cards_to_cardbox_ui(card : Card):
-	var textureRect = TextureRect.new()
+	var textureRect : TextureRect = card_scene.instantiate()
 	textureRect.texture = load(card.get_card_resource())
-	textureRect.custom_minimum_size = Vector2(204,300)
 	cardbox.add_child(textureRect)
