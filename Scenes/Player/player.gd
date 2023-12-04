@@ -10,6 +10,7 @@ var current_row = 0
 var current_col = 0
 var current_z_index :int = 1
 var max_col = 20
+@onready var cardbox = get_tree().get_first_node_in_group("CardBox")
 
 var gridSpacing = Vector2(5,5)  # Adjust the spacing between sprites
 var gridSize = Vector2(20, 2)       # Adjust the number of rows and columns
@@ -37,11 +38,13 @@ func add_card_to_game(all_cards: bool):
 		#For each card in the hand
 		for card in hand.card_array:
 			#Create an instance of the card
-			add_card_to_grid(card)
+			#add_card_to_grid(card)
+			add_cards_to_cardbox_ui(card)
 	else:
 		#Create an instance of the card
 		var card = hand.card_array[hand.card_array.size()-1]
-		add_card_to_grid(card)
+		#add_card_to_grid(card)
+		add_cards_to_cardbox_ui(card)
 
 
 #Move the card to the other slot 
@@ -77,3 +80,10 @@ func test_add_cards_to_grid():
 			print(new_pos)
 			# Add the sprite as a child of the Area2D
 			add_child(sprite)
+
+
+func add_cards_to_cardbox_ui(card : Card):
+	var textureRect = TextureRect.new()
+	textureRect.texture = load(card.get_card_resource())
+	textureRect.custom_minimum_size = Vector2(204,300)
+	cardbox.add_child(textureRect)

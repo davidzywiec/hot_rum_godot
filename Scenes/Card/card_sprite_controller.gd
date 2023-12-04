@@ -1,6 +1,6 @@
 extends Sprite2D
 
-var is_highlighted = false
+var is_highlighted = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,6 +17,7 @@ func _input(event):
 	if event is InputEventMouseButton and event.pressed:		
 		if get_rect().has_point(to_local(event.position)):
 			select_card()
+	
 
 
 func set_shader_param(new_bool : bool):
