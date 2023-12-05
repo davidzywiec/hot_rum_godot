@@ -2,12 +2,10 @@
 
 [ext_resource type="Script" path="res://Scenes/Card/card_sprite_controller.gd" id="1_7rjjv"]
 [ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="1_xloae"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dgq3o"]
-load_path = "res://.godot/imported/Back1.png-41131500a954b8857993c9292815c918.ctex"
+[ext_resource type="Texture2D" uid="uid://cwj12yus1f7jq" path="res://Card Assets/card_back.png" id="2_svdjr"]
 
 [node name="Card2D" type="Sprite2D" groups=["selectable_card"]]
 material = ExtResource("1_xloae")
 scale = Vector2(2, 2)
-texture = SubResource("CompressedTexture2D_dgq3o")
+texture = ExtResource("2_svdjr")
 script = ExtResource("1_7rjjv")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqsgsg05othu3"]
+[gd_scene load_steps=9 format=3 uid="uid://cqsgsg05othu3"]
 
 [ext_resource type="PackedScene" uid="uid://cp66ortydxrup" path="res://Scenes/GameController/game_controller.tscn" id="1_5j83b"]
 [ext_resource type="PackedScene" uid="uid://b7sg6lhng64lp" path="res://Scenes/Player/player.tscn" id="2_4cx05"]
 [ext_resource type="PackedScene" uid="uid://cq03h23u2qvym" path="res://Scenes/UIController/ui_controller.tscn" id="3_dbdis"]
+[ext_resource type="Texture2D" uid="uid://cwj12yus1f7jq" path="res://Card Assets/card_back.png" id="5_tgo0f"]
 [ext_resource type="PackedScene" uid="uid://c0ojd1xt0v51j" path="res://Scenes/CardAreaUI/CardAreaUI.tscn" id="6_2udjd"]
 [ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="6_bbmmr"]
 [ext_resource type="Texture2D" uid="uid://58gv2y2mausi" path="res://Card Assets/CardArea/card_area_sprite.png" id="7_4l4au"]
@@ -34,8 +35,7 @@ position = Vector2(960, 352)
 
 [node name="DiscardCard" type="Sprite2D" parent="Deck Area" groups=["Discard Card"]]
 material = ExtResource("6_bbmmr")
-scale = Vector2(2, 2)
-texture = SubResource("CompressedTexture2D_dgq3o")
+texture = ExtResource("5_tgo0f")
 
 [node name="Players" type="Node2D" parent="."]
 
@@ -67,6 +67,5 @@ offset_bottom = 132.0
 text = "Player Phase"
 
 [node name="CardArea" parent="." instance=ExtResource("6_2udjd")]
-offset_top = 720.0
-offset_right = 1920.0
-offset_bottom = 1025.0
+offset_top = 768.0
+offset_bottom = 1073.0

@@ -1,13 +1,23 @@
 [gd_scene load_steps=3 format=3 uid="uid://dhbk06ekkcibq"]
 
-[ext_resource type="Texture2D" uid="uid://c0iy0xaafj1wq" path="res://Card Assets/1.1.png" id="1_sc84g"]
+[ext_resource type="Texture2D" uid="uid://cwj12yus1f7jq" path="res://Card Assets/card_back.png" id="1_xpdsk"]
 [ext_resource type="Script" path="res://Scenes/Card/scrollview_card.gd" id="2_h0d7l"]
 
 [node name="Card" type="TextureRect"]
-custom_minimum_size = Vector2(204, 300)
-offset_top = -1.0
-offset_right = 204.0
-offset_bottom = 299.0
+custom_minimum_size = Vector2(50, 72)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -910.0
+offset_bottom = -468.0
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 1
-texture = ExtResource("1_sc84g")
+mouse_default_cursor_shape = 2
+texture = ExtResource("1_xpdsk")
+expand_mode = 3
 script = ExtResource("2_h0d7l")
