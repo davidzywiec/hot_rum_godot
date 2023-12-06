@@ -21,3 +21,5 @@ mouse_default_cursor_shape = 2
 texture = ExtResource("1_xpdsk")
 expand_mode = 3
 script = ExtResource("2_h0d7l")
+
+[node name="Timer" type="Timer" parent="."]

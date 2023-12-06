@@ -1,7 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0ojd1xt0v51j"]
-
-[ext_resource type="PackedScene" uid="uid://dhbk06ekkcibq" path="res://Scenes/Card/scrollview_card.tscn" id="1_q2iso"]
-[ext_resource type="Texture2D" uid="uid://d0hi4wh7xysy2" path="res://Card Assets/1_diamond.png" id="2_5pl5e"]
+[gd_scene format=3 uid="uid://c0ojd1xt0v51j"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -30,14 +27,3 @@ theme_override_constants/margin_bottom = 5
 [node name="HBoxContainer" type="HBoxContainer" parent="CardArea/CenterContainer/MarginContainer" groups=["CardBox"]]
 layout_mode = 2
 theme_override_constants/separation = 4
-
-[node name="Card" parent="CardArea/CenterContainer/MarginContainer/HBoxContainer" instance=ExtResource("1_q2iso")]
-unique_name_in_owner = true
-layout_mode = 2
-texture = ExtResource("2_5pl5e")
-
-[node name="Card2" parent="CardArea/CenterContainer/MarginContainer/HBoxContainer" instance=ExtResource("1_q2iso")]
-layout_mode = 2
-
-[node name="Card3" parent="CardArea/CenterContainer/MarginContainer/HBoxContainer" instance=ExtResource("1_q2iso")]
-layout_mode = 2

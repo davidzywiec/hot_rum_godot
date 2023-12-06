@@ -92,7 +92,7 @@ func pass_card():
 func take_card():
 	var drawn_card = discard_pile.pop_back()	
 	#Set the current discard card to null.
-	#set_discard_card(null)
+	set_discard_card(null, false)
 	send_player_card(drawn_card)
 
 func try_discard():

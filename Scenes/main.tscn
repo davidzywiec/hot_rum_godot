@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqsgsg05othu3"]
+[gd_scene load_steps=8 format=3 uid="uid://cqsgsg05othu3"]
 
 [ext_resource type="PackedScene" uid="uid://cp66ortydxrup" path="res://Scenes/GameController/game_controller.tscn" id="1_5j83b"]
 [ext_resource type="PackedScene" uid="uid://b7sg6lhng64lp" path="res://Scenes/Player/player.tscn" id="2_4cx05"]
@@ -7,9 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://c0ojd1xt0v51j" path="res://Scenes/CardAreaUI/CardAreaUI.tscn" id="6_2udjd"]
 [ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="6_bbmmr"]
 [ext_resource type="Texture2D" uid="uid://58gv2y2mausi" path="res://Card Assets/CardArea/card_area_sprite.png" id="7_4l4au"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dgq3o"]
-load_path = "res://.godot/imported/Back1.png-41131500a954b8857993c9292815c918.ctex"
 
 [node name="Main" type="Node2D"]
 
@@ -25,7 +22,6 @@ texture = ExtResource("7_4l4au")
 
 [node name="GameController" parent="Controllers" instance=ExtResource("1_5j83b")]
 position = Vector2(-905, 86)
-default_card = SubResource("CompressedTexture2D_dgq3o")
 
 [node name="UIController" parent="Controllers" groups=["UIController"] instance=ExtResource("3_dbdis")]
 size_flags_horizontal = 4
@@ -69,3 +65,5 @@ text = "Player Phase"
 [node name="CardArea" parent="." instance=ExtResource("6_2udjd")]
 offset_top = 768.0
 offset_bottom = 1073.0
+
+[node name="MouseHolder" type="Node2D" parent="."]
