@@ -4,6 +4,9 @@ enum Suit {spades, hearts, diamonds, clubs};
 
 var number : int
 var suit : Suit
+var texrect_card_scene : PackedScene = preload("res://Scenes/Card/scrollview_card.tscn")
+var sprite_card_scene : PackedScene = preload("res://Scenes/Card/card.tscn")
+
 
 
 func _init(number : int, suit : Suit):
