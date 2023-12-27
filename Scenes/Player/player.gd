@@ -12,7 +12,7 @@ var max_col = 20
 @onready var cardbox = get_tree().get_first_node_in_group("CardBox")
 @onready var ai_agent = $AIAgent
 @onready var game_controller = get_tree().get_first_node_in_group("GameController")
-var pass_action = null
+var pass_action : CardActions.Action
 
 var gridSpacing = Vector2(5,5)  # Adjust the spacing between sprites
 var gridSize = Vector2(20, 2)       # Adjust the number of rows and columns
@@ -60,8 +60,9 @@ func request_pickup(card : Card):
 	if is_player:
 		pass
 	else:
-		ai_agent.request_pickup_card(false, card)
+		pass_action = ai_agent.request_pickup_card(false, card)
 
-func pick_card(action: bool):
-	print("Pick Card action: ", str(action))
+
+func pick_card(action: CardActions.Action):
+	print("Pick Card action: ", CardActions.card_action_string[action])
 	#pass_action = action

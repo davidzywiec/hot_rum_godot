@@ -106,64 +106,64 @@ offset_top = 23.0
 offset_right = 1905.0
 offset_bottom = 402.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerContainer"]
+[node name="PlayerArea" type="VBoxContainer" parent="PlayerContainer"]
 layout_mode = 2
 
-[node name="PlayerContainer" type="HBoxContainer" parent="PlayerContainer/VBoxContainer"]
+[node name="PlayerContainer" type="HBoxContainer" parent="PlayerContainer/PlayerArea" groups=["UIPlayerArea"]]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PlayerContainer/VBoxContainer/PlayerContainer"]
+[node name="PlayerName" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "Player"
+text = "Player 1"
 
-[node name="ActionLabel" type="Label" parent="PlayerContainer/VBoxContainer/PlayerContainer"]
+[node name="ActionLabel" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pass"
 
-[node name="PlayerContainer2" type="HBoxContainer" parent="PlayerContainer/VBoxContainer"]
+[node name="PlayerContainer2" type="HBoxContainer" parent="PlayerContainer/PlayerArea" groups=["UIPlayerArea"]]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PlayerContainer/VBoxContainer/PlayerContainer2"]
+[node name="PlayerName" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 text = "Player 2  [BOT]"
 
-[node name="ActionLabel" type="Label" parent="PlayerContainer/VBoxContainer/PlayerContainer2"]
+[node name="ActionLabel" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer2"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pass"
 
-[node name="PlayerContainer3" type="HBoxContainer" parent="PlayerContainer/VBoxContainer"]
+[node name="PlayerContainer3" type="HBoxContainer" parent="PlayerContainer/PlayerArea" groups=["UIPlayerArea"]]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PlayerContainer/VBoxContainer/PlayerContainer3"]
+[node name="PlayerName" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 text = "Player 3  [BOT]"
 
-[node name="ActionLabel" type="Label" parent="PlayerContainer/VBoxContainer/PlayerContainer3"]
+[node name="ActionLabel" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer3"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pass"
 
-[node name="PlayerContainer4" type="HBoxContainer" parent="PlayerContainer/VBoxContainer"]
+[node name="PlayerContainer4" type="HBoxContainer" parent="PlayerContainer/PlayerArea" groups=["UIPlayerArea"]]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PlayerContainer/VBoxContainer/PlayerContainer4"]
+[node name="PlayerName" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 text = "Player 4  [BOT]"
 
-[node name="ActionLabel" type="Label" parent="PlayerContainer/VBoxContainer/PlayerContainer4"]
+[node name="ActionLabel" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer4"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3

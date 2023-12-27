@@ -22,6 +22,7 @@ texture = ExtResource("7_4l4au")
 
 [node name="GameController" parent="Controllers" groups=["GameController"] instance=ExtResource("1_5j83b")]
 position = Vector2(-905, 86)
+pickup_card_time = 20.0
 
 [node name="UIController" parent="Controllers" groups=["UIController"] instance=ExtResource("3_dbdis")]
 size_flags_horizontal = 4
@@ -40,15 +41,15 @@ texture = ExtResource("5_tgo0f")
 
 [node name="Player" parent="Players" instance=ExtResource("2_4cx05")]
 position = Vector2(123, 704)
+
+[node name="Player 2" parent="Players" instance=ExtResource("2_4cx05")]
+visible = false
 is_player = true
 
-[node name="Player2" parent="Players" instance=ExtResource("2_4cx05")]
+[node name="Player 3" parent="Players" instance=ExtResource("2_4cx05")]
 visible = false
 
-[node name="Player3" parent="Players" instance=ExtResource("2_4cx05")]
-visible = false
-
-[node name="Player4" parent="Players" instance=ExtResource("2_4cx05")]
+[node name="Player 4" parent="Players" instance=ExtResource("2_4cx05")]
 visible = false
 
 [node name="GamePhase" type="Label" parent="."]

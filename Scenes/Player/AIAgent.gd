@@ -6,9 +6,10 @@ extends Node
 
 #TODO: Add error chance to the AI actions
 
-func request_pickup_card(is_turn: bool, card: Card) -> bool:
+func request_pickup_card(is_turn: bool, card: Card) -> CardActions.Action:
 	#TODO: Add logic to determine when to pickup card.
-	return false
+	print("AI: Requesting pickup card")
+	return CardActions.Action.PASS
 
 func discard_card() -> int:
 	#Always dicard the first card in hand

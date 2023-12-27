@@ -11,7 +11,9 @@ class_name GameController
 
 #Pickup Settings
 @onready var pickup_card_timer = $PickUpTimer
-@export var pickup_card_time: float = 5.0
+@export var pickup_card_time: float = 20.0
+var player_pickup_request : Array = [false, false, false, false]
+var players_picked_up = 0
 
 #Round Controller
 @onready var roundControllerScene = preload("res://Scenes/GameController/round_controller.tscn")
@@ -26,11 +28,11 @@ var discard_pile : Array = []
 var current_discard_card : Card
 
 #Player variables
-var current_player :int = 1
+var current_player : int = 1
 var player_count = 0
 var round_index = -1
 var round_card_number = [7,8,9,10,11,11,12,13]
-var player_pickup_request : Array = [false, false, false, false]
+
 
 #Define a signal for the game controller to emit to update the rule text.
 signal update_rule_text(text :String)
@@ -43,6 +45,9 @@ func _ready():
 	game_ui.start_game_signal.connect(start_game)
 	game_ui.card_action_signal.connect(player_card_action)
 	pickup_card_timer.timeout.connect(_pickup_card_timeout)
+	game_ui.player_index = current_player
+	call_deferred("set_player_names")
+
 
 
 #Process every frame
@@ -50,6 +55,9 @@ func _process(delta):
 	gamePhaseLabel.text = game_phase.get_phase_label()
 	if pickup_card_timer.time_left <= 0.0:
 		game_ui.toggle_pickup_timer_label(false)
+	elif players_picked_up == players.size():
+		print("All players sent action")
+		pickup_card_timer.stop()
 	else:
 		game_ui.toggle_pickup_timer_label(true)
 		game_ui.update_pickup_timer_label(pickup_card_timer.time_left)
@@ -59,9 +67,8 @@ func _process(delta):
 func start_game():
 	game_phase.next_phase()
 	call_deferred("_initialize_new_round")
-	#Call UI player to pick up card.
-	game_ui.ask_player_to_pick_card(players[current_player].is_player)
-	initalizePickupSequence()
+
+	
 
 
 #Add a new round to the game
@@ -72,6 +79,9 @@ func _initialize_new_round():
 	current_round_controller.current_round = round_index + 1
 	get_parent().add_child(current_round_controller)
 	current_round_controller.start_round()
+	#Call UI player to pick up card.
+	game_ui.ask_player_to_pick_card(players[current_round_controller.current_player].is_player)
+	initalizePickupSequence()
 
 
 #Set the discard card based on pickup or put down
@@ -95,16 +105,39 @@ func set_discard_card(new_card : Card, first_card : bool):
 		discard_card.texture = load(new_card.get_card_resource())
 
 #Player Card Action
-func player_card_action(action : CardAction.Action):
+func player_card_action(action : CardActions.Action, player: int):
 	#If the current player decides to pickup the card than take the card from the discard pile.
-	if action == CardAction.Action.TAKE:
-		var drawn_card = discard_pile.pop_back()	
-		#Set the current discard card to null.
-		set_discard_card(null, false)
-		send_player_card(drawn_card)
-	elif action == CardAction.Action.DRAW:
-		initalizePickupSequence()
-		print("InitializePickUpSequence")
+	if player == current_round_controller.current_player:
+		print("Player is current player")
+		match action:
+			CardActions.Action.TAKE:
+				var drawn_card = discard_pile.pop_back()	
+				#Set the current discard card to null.
+				set_discard_card(null, false)
+				send_player_card(drawn_card)
+			CardActions.Action.DRAW:
+				initalizePickupSequence()
+			_:
+				print("Invalid Selection made by player.")
+	#If the current player is not the user than check if the player is an AI or a player.
+	else:
+		print("Player is NOT current player")
+		match action:
+			CardActions.Action.REQUEST:
+				print("Player " + str(player+1) + " requested to pickup the card")
+				player_pickup_request[player] = true
+				players_picked_up += 1
+			CardActions.Action.PASS:
+				print("Player " + str(player+1) + " passed on the card")
+				player_pickup_request[player] = false
+				players_picked_up += 1
+			_:
+				print("Invalid Selection made by player.")
+	
+	#Update the game ui with the players action.
+	game_ui.update_player_action(player, CardActions.get_action_string(action))
+
+
 
 #Initialize the pickup sequence. Request all players to pickup or pass.
 func initalizePickupSequence():
@@ -115,11 +148,18 @@ func initalizePickupSequence():
 			continue
 		#If the player in the list is the user then ask the user to pick a card.
 		elif players[index].is_player:
-			game_ui.ask_player_to_pick_card(false)
+			player_pickup_request[index] = game_ui.ask_player_to_pick_card(false)
 		#If the player in the list not the user then ask the AI to pick a card.
 		else:
 			players[index].request_pickup(current_discard_card)
-	
+			var player_action = players[index].pass_action
+			player_pickup_request[index] = player_action
+			game_ui.update_player_action(index, CardActions.get_action_string(player_action))
+			players_picked_up += 1
+
+	#Start the timer.
+	pickup_card_timer.start(pickup_card_time)
+	#Get all AI players to decide if they want to pickup the card or not.
 	return true
 
 
@@ -132,7 +172,6 @@ func draw_card():
 	send_player_card(drawn_card)
 		
 	
-
 #Pass on the card
 func pass_card():
 	#next_player()
@@ -186,3 +225,12 @@ func _pickup_card_timeout():
 	#If all players pass than the current player can draw a card from the deck.
 	#If a player requests to pickup the card, than decide who has first priority. Than the current player can draw a card from the deck.
 	print("Time is up!")
+
+#Set player names
+func set_player_names():
+	for index in range(players.size()):
+		if players[index].is_player:
+			players[index].name = " [ME] " + players[index].name 
+		else:
+			players[index].name = " [BOT] " + players[index].name 
+		game_ui.set_player_names(index, players[index].name)

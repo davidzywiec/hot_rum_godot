@@ -16,16 +16,21 @@ extends Control
 #PickupTimer Label
 @onready var pickup_timer_label : Label = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/PickupCountDown
 
+#Player Labels
+@onready var player_area : Array = get_tree().get_nodes_in_group("UIPlayerArea")
+
+
+var player_index : int = 0
 
 signal start_game_signal
-signal card_action_signal(action : CardAction.Action)
+signal card_action_signal(action : CardActions.Action)
 
 func _ready():
 	start_button.pressed.connect(start_game)
 	draw_button.pressed.connect(draw_card)
 	pass_button.pressed.connect(pass_card)
 	take_button.pressed.connect(take_card)
-	req_button.pressed.connect(request_discard_card)
+	req_button.pressed.connect(request_card)
 	discard_button.pressed.connect(discard_card)
 
 
@@ -44,31 +49,31 @@ func start_game():
 	
 
 func draw_card():
-	emit_signal("card_action_signal", CardAction.Action.DRAW)
+	emit_signal("card_action_signal", CardActions.Action.DRAW, player_index)
 	take_button.visible = false
 	draw_button.visible = false
 	hide_pickup_rules()
 
 
 func pass_card():
-	emit_signal("card_action_signal", CardAction.Action.PASS)
+	emit_signal("card_action_signal", CardActions.Action.PASS, player_index)
 	hide_pickup_rules()
 
 
 func take_card():
-	emit_signal("card_action_signal", CardAction.Action.TAKE)
+	emit_signal("card_action_signal", CardActions.Action.TAKE, player_index)
 	take_button.visible = false
 	draw_button.visible = false
 	hide_pickup_rules()
 
-func request_discard_card():
-	emit_signal("card_action_signal", CardAction.Action.REQUEST)
+func request_card():
+	emit_signal("card_action_signal", CardActions.Action.REQUEST, player_index)
 	pass_button.visible = false
 	req_button.visible = false
 	hide_pickup_rules()
 
 func discard_card():
-	emit_signal("card_action_signal", CardAction.Action.DISCARD)
+	emit_signal("card_action_signal", CardActions.Action.DISCARD, player_index)
 
 func hide_buttons():
 	btn_container.visible = false
@@ -99,3 +104,18 @@ func update_pickup_timer_label(time_left : float):
 
 func toggle_pickup_timer_label(toggle : bool):
 	pickup_timer_label.visible = toggle
+
+func update_player_action(player_index : int, action_name : String):
+	player_area[player_index].get_node("ActionLabel").text = action_name
+	player_area[player_index].get_node("ActionLabel").visible = true
+
+func clear_player_action():
+	for node in player_area:
+		node.get_node("ActionLabel").text = ""
+		node.get_node("ActionLabel").visible = false
+
+
+func set_player_names(index : int, name : String):
+	if index < player_area.size():
+		player_area[index].get_node("PlayerName").text = name
+
