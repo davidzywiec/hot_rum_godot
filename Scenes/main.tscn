@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqsgsg05othu3"]
+[gd_scene load_steps=8 format=3 uid="uid://cqsgsg05othu3"]
 
 [ext_resource type="PackedScene" uid="uid://cp66ortydxrup" path="res://Scenes/GameController/game_controller.tscn" id="1_5j83b"]
 [ext_resource type="PackedScene" uid="uid://b7sg6lhng64lp" path="res://Scenes/Player/player.tscn" id="2_4cx05"]
 [ext_resource type="PackedScene" uid="uid://cq03h23u2qvym" path="res://Scenes/UIController/ui_controller.tscn" id="3_dbdis"]
 [ext_resource type="Texture2D" uid="uid://cwj12yus1f7jq" path="res://Card Assets/card_back.png" id="5_tgo0f"]
 [ext_resource type="PackedScene" uid="uid://c0ojd1xt0v51j" path="res://Scenes/CardAreaUI/CardAreaUI.tscn" id="6_2udjd"]
-[ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="6_bbmmr"]
 [ext_resource type="Texture2D" uid="uid://58gv2y2mausi" path="res://Card Assets/CardArea/card_area_sprite.png" id="7_4l4au"]
 [ext_resource type="Script" path="res://Scenes/MouseHolder.gd" id="8_nn31v"]
 
@@ -21,17 +20,20 @@ texture = ExtResource("7_4l4au")
 
 [node name="Controllers" type="Node2D" parent="."]
 
-[node name="GameController" parent="Controllers" instance=ExtResource("1_5j83b")]
+[node name="GameController" parent="Controllers" groups=["GameController"] instance=ExtResource("1_5j83b")]
 position = Vector2(-905, 86)
 
 [node name="UIController" parent="Controllers" groups=["UIController"] instance=ExtResource("3_dbdis")]
 size_flags_horizontal = 4
 
 [node name="Deck Area" type="Node2D" parent="." groups=["Deck Area"]]
-position = Vector2(960, 352)
+position = Vector2(960, 461)
 
 [node name="DiscardCard" type="Sprite2D" parent="Deck Area" groups=["Discard Card"]]
-material = ExtResource("6_bbmmr")
+texture = ExtResource("5_tgo0f")
+
+[node name="DeckCard" type="Sprite2D" parent="Deck Area" groups=["Discard Card"]]
+position = Vector2(-104, 0)
 texture = ExtResource("5_tgo0f")
 
 [node name="Players" type="Node2D" parent="."]
@@ -42,28 +44,25 @@ is_player = true
 
 [node name="Player2" parent="Players" instance=ExtResource("2_4cx05")]
 visible = false
-is_player = false
 
 [node name="Player3" parent="Players" instance=ExtResource("2_4cx05")]
 visible = false
-is_player = false
 
 [node name="Player4" parent="Players" instance=ExtResource("2_4cx05")]
 visible = false
-is_player = false
 
 [node name="GamePhase" type="Label" parent="."]
-offset_left = 1734.0
-offset_top = 38.0
-offset_right = 1774.0
-offset_bottom = 61.0
+offset_left = 1772.0
+offset_top = 948.0
+offset_right = 1868.0
+offset_bottom = 974.0
 text = "Game Phase"
 
 [node name="PlayerPhase" type="Label" parent="."]
-offset_left = 1734.0
-offset_top = 109.0
-offset_right = 1774.0
-offset_bottom = 132.0
+offset_left = 1772.0
+offset_top = 1019.0
+offset_right = 1871.0
+offset_bottom = 1045.0
 text = "Player Phase"
 
 [node name="CardArea" parent="." instance=ExtResource("6_2udjd")]

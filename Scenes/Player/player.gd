@@ -10,6 +10,9 @@ var current_col = 0
 var current_z_index :int = 1
 var max_col = 20
 @onready var cardbox = get_tree().get_first_node_in_group("CardBox")
+@onready var ai_agent = $AIAgent
+@onready var game_controller = get_tree().get_first_node_in_group("GameController")
+var pass_action = null
 
 var gridSpacing = Vector2(5,5)  # Adjust the spacing between sprites
 var gridSize = Vector2(20, 2)       # Adjust the number of rows and columns
@@ -17,7 +20,6 @@ var gridSize = Vector2(20, 2)       # Adjust the number of rows and columns
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -53,3 +55,13 @@ func add_cards_to_cardbox_ui(card : Card):
 		textureRect.set_card(card)
 	else:
 		print("TextureRect has no method set_card")
+	
+func request_pickup(card : Card):
+	if is_player:
+		pass
+	else:
+		ai_agent.request_pickup_card(false, card)
+
+func pick_card(action: bool):
+	print("Pick Card action: ", str(action))
+	#pass_action = action
