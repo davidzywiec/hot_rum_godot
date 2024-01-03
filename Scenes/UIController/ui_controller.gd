@@ -6,9 +6,8 @@ extends Control
 @onready var req_button: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/RequestCard
 @onready var pass_button: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/PassCard
 @onready var take_button: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/TakeCard
-@onready var discard_button: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/DiscardCard
 @onready var btn_container: VBoxContainer = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer
-
+var discard_button : Button
 #Pickup Rules
 @onready var pu_non_turn_rule : Label = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/PickupCardOutOfTurn
 @onready var pu_turn_rule : Label = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/PickupCardOnTurn
@@ -19,11 +18,15 @@ extends Control
 #Player Labels
 @onready var player_area : Array = get_tree().get_nodes_in_group("UIPlayerArea")
 
+#Discard Area Button
+@onready var discard_area : Sprite2D = get_tree().get_first_node_in_group("discard_area_sprite")
+
+@export var current_player_color : Color = Color.GREEN
 
 var player_index : int = 0
 
 signal start_game_signal
-signal card_action_signal(action : CardActions.Action)
+signal card_action_signal(action : CardActions.Action, player_index : int)
 
 func _ready():
 	start_button.pressed.connect(start_game)
@@ -31,7 +34,9 @@ func _ready():
 	pass_button.pressed.connect(pass_card)
 	take_button.pressed.connect(take_card)
 	req_button.pressed.connect(request_card)
-	discard_button.pressed.connect(discard_card)
+	discard_button = discard_area.get_node("ConfirmDiscard")
+	if discard_button:
+		discard_button.pressed.connect(discard_card)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -118,4 +123,29 @@ func clear_player_action():
 func set_player_names(index : int, name : String):
 	if index < player_area.size():
 		player_area[index].get_node("PlayerName").text = name
+
+
+func toggle_discard_area(toggle : bool):
+	discard_area.visible = toggle
+	if discard_area.has_method("toggle_active"):
+		discard_area.toggle_active(toggle)
+
+func toggle_lock_discard_area(toggle: bool):
+	discard_button.disabled = toggle
+	if discard_area.has_method("toggle_lock"):
+		discard_area.toggle_lock(toggle)
+
+func get_discard_card() -> Card:
+	if discard_area.has_method("get_card"):
+		return discard_area.get_card()
+	return null
+
+func set_current_player(current_player_index: int):
+	var index = 0
+	for node in player_area:
+		if index == current_player_index:
+			node.get_node("PlayerName").add_theme_color_override("font_color", current_player_color)
+		else:
+			node.get_node("PlayerName").add_theme_color_override("font_color", Color.WHITE)
+		index += 1
 

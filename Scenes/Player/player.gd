@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var is_player : bool = false
+@export var player_index : int = 0
 var hand : Hand = null
 var screen_size : Vector2 = Vector2.ZERO
 var offset = 0
@@ -61,8 +62,3 @@ func request_pickup(card : Card):
 		pass
 	else:
 		pass_action = ai_agent.request_pickup_card(false, card)
-
-
-func pick_card(action: CardActions.Action):
-	print("Pick Card action: ", CardActions.card_action_string[action])
-	#pass_action = action

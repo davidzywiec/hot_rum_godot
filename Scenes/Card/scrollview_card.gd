@@ -48,9 +48,8 @@ func _input(event):
 			#Print released when the mouse is released			
 			timer.stop()
 			
-		if event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
-			print("Double click selected: " + str(self.get_index()))
-			get_parent().move_child(self,2)
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
+		let_card_go()
 
 
 #Long press function moves the card to the mouse holder node.
@@ -96,3 +95,11 @@ func toggle_highlight():
 	else:
 		modulate = Color(1, 1, 1, 1)
 		remove_from_group("selected")
+
+func let_card_go():
+	if mouse_holder_node.has_card:
+		var textureRect : TextureRect = mouse_holder_node.card.texrect_card_scene.instantiate()
+		get_parent().add_child(textureRect)
+		if textureRect.has_method("set_card"):
+			textureRect.set_card(mouse_holder_node.card)
+			mouse_holder_node.remove_card()
