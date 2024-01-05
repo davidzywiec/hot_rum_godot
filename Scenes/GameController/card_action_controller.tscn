@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://fej6d0rpp5kb"]
+
+[ext_resource type="Script" path="res://Scenes/GameController/card_action_controller.gd" id="1_qijej"]
+
+[node name="CardActionController" type="Node"]
+script = ExtResource("1_qijej")

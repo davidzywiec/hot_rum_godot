@@ -8,7 +8,6 @@ var texrect_card_scene : PackedScene = preload("res://Scenes/Card/scrollview_car
 var sprite_card_scene : PackedScene = preload("res://Scenes/Card/card.tscn")
 
 
-
 func _init(number : int, suit : Suit):
 	self.number = number
 	self.suit = suit

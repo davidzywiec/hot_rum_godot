@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqsgsg05othu3"]
+[gd_scene load_steps=13 format=3 uid="uid://cqsgsg05othu3"]
 
 [ext_resource type="PackedScene" uid="uid://cp66ortydxrup" path="res://Scenes/GameController/game_controller.tscn" id="1_5j83b"]
 [ext_resource type="PackedScene" uid="uid://b7sg6lhng64lp" path="res://Scenes/Player/player.tscn" id="2_4cx05"]
 [ext_resource type="PackedScene" uid="uid://cq03h23u2qvym" path="res://Scenes/UIController/ui_controller.tscn" id="3_dbdis"]
+[ext_resource type="PackedScene" uid="uid://bcsfgpw8ah2nl" path="res://Scenes/Player/player_controller.tscn" id="4_5xvfn"]
+[ext_resource type="PackedScene" uid="uid://fej6d0rpp5kb" path="res://Scenes/GameController/card_action_controller.tscn" id="5_28df7"]
 [ext_resource type="Texture2D" uid="uid://dnjvnpgvrrrt3" path="res://Card Assets/discard_card.png" id="5_cb7lu"]
 [ext_resource type="Texture2D" uid="uid://cwj12yus1f7jq" path="res://Card Assets/card_back.png" id="5_tgo0f"]
 [ext_resource type="PackedScene" uid="uid://c0ojd1xt0v51j" path="res://Scenes/CardAreaUI/CardAreaUI.tscn" id="6_2udjd"]
@@ -30,6 +32,10 @@ position = Vector2(-905, 86)
 
 [node name="UIController" parent="Controllers" groups=["UIController"] instance=ExtResource("3_dbdis")]
 size_flags_horizontal = 4
+
+[node name="PlayerController" parent="Controllers" instance=ExtResource("4_5xvfn")]
+
+[node name="CardActionController" parent="Controllers" instance=ExtResource("5_28df7")]
 
 [node name="Deck Area" type="Node2D" parent="." groups=["Deck Area"]]
 position = Vector2(960, 461)

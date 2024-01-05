@@ -1,10 +1,10 @@
 extends Node2D
 class_name GameController
 
-
 #Controllers
 @onready var game_ui := $"../UIController"
 @onready var player_controller := $"../PlayerController"
+@onready var card_action_controller := $"../CardActionController"
 
 @onready var game_phase = GamePhase.new()
 @onready var players = get_tree().get_nodes_in_group("Player")
@@ -51,7 +51,6 @@ func _ready():
 	game_ui.start_game_signal.connect(start_game)
 	game_ui.card_action_signal.connect(player_card_action)
 	pickup_card_timer.timeout.connect(_pickup_card_timeout)
-	call_deferred("set_player_names")
 
 #Process every frame
 func _process(delta):
@@ -85,7 +84,7 @@ func initalizePickupSequence():
 	#Ask the players to pick a card. Start the timer for # of seconds.
 	for index in range(players.size()):
 		#If the current player is in the list then skip.
-		if index == current_player:
+		if index == current_round_controller.current_player:
 			continue
 		#If the player in the list is the user then ask the user to pick a card.
 		elif players[index].is_player:
@@ -104,38 +103,6 @@ func initalizePickupSequence():
 	#Get all AI players to decide if they want to pickup the card or not.
 	return true
 
-#Draw card from the deck
-func draw_card():
-	print("Player decided to draw from deck.")
-	#Card is taken off the top of the deck and put to the current players hand
-	var drawn_card = deck.deal_card()
-	send_player_card(drawn_card)
-	current_round_controller.set_current_player_phase(playerPhase.player_phase.DISCARDING)
-	#Set the UI to not show the actions.
-	game_ui.hide_buttons()
-
-#Take the card from the discard pile
-func take_card():
-	var drawn_card = discard_pile.pop_back()	
-	#Set the current discard card to null.
-	set_discard_card(null, false)
-	send_player_card(drawn_card)
-	pickup_card_timer.stop()
-	game_ui.toggle_pickup_timer_label(false)
-	current_round_controller.set_current_player_phase(playerPhase.player_phase.DISCARDING)
-	
-
-#Discard the card from the player's hand that is selected.
-func try_discard():
-	#Lock the discard area.
-	game_ui.toggle_lock_discard_area(true)
-	#Get the card from the discardArea and set it to the current discard card.
-	var new_discard_card = game_ui.get_discard_card()
-	if new_discard_card:
-		set_discard_card(new_discard_card, false)
-		game_ui.toggle_lock_discard_area(false)
-		game_ui.toggle_discard_area(false)
-	current_round_controller.next_player()
 
 #Set the discard card based on pickup or put down
 func set_discard_card(new_card : Card, first_card : bool):
@@ -175,21 +142,10 @@ func _pickup_card_timeout():
 	#If all players pass than the current player can draw a card from the deck.
 	#If a player requests to pickup the card, than decide who has first priority. Than the current player can draw a card from the deck.
 	if !player_pickup_request.has(true):
-		draw_card()
+		card_action_controller.draw_card()
 	else:
 		var priority_player = get_first_priority_player()
 		print("Priority Player: " + str(players[priority_player].name))
-
-#Set player names
-func set_player_names():
-	for index in range(players.size()):
-		if players[index].is_player:
-			players[index].name = " [ME] " + players[index].name 
-		else:
-			players[index].name = " [BOT] " + players[index].name 
-			
-		game_ui.set_player_names(index, players[index].name)
-
 
 func get_first_priority_player() -> int:
 	var current_index = current_round_controller.current_player + 1
@@ -244,13 +200,13 @@ func player_action(action : CardActions.Action, player: int):
 		match action:
 			CardActions.Action.TAKE:
 				print("Player " + str(player+1) + " current turn. Requested to Pick up")
-				take_card()				
+				card_action_controller.take_card()				
 			CardActions.Action.DRAW:
 				print("Player " + str(player+1) + " current turn. Requested to Draw")
 				initalizePickupSequence()
 			CardActions.Action.DISCARD:
 				print("Player " + str(player+1) + " current turn. Requested to Discard")
-				try_discard()
+				card_action_controller.discard_card()
 			_:
 				print("Invalid Selection made by player.")
 	#If the current player is not the user than check if the player is an AI or a player.
