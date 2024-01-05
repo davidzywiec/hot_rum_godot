@@ -1,11 +1,16 @@
 extends Node2D
 class_name GameController
 
+
+#Controllers
+@onready var game_ui := $"../UIController"
+@onready var player_controller := $"../PlayerController"
+
 @onready var game_phase = GamePhase.new()
 @onready var players = get_tree().get_nodes_in_group("Player")
 @onready var player_phases : Array[playerPhase] = [playerPhase.new(), playerPhase.new(), playerPhase.new(), playerPhase.new()]
 @onready var deck = Deck.new()
-@onready var game_ui := $"../UIController"
+
 @onready var deck_area = get_tree().get_first_node_in_group("Deck Area") as Node2D
 @onready var discard_card = get_tree().get_first_node_in_group("Discard Card") as Sprite2D
 @export var default_card : Texture2D
@@ -46,9 +51,7 @@ func _ready():
 	game_ui.start_game_signal.connect(start_game)
 	game_ui.card_action_signal.connect(player_card_action)
 	pickup_card_timer.timeout.connect(_pickup_card_timeout)
-	game_ui.player_index = current_player
 	call_deferred("set_player_names")
-
 
 #Process every frame
 func _process(delta):
