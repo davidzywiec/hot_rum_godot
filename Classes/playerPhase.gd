@@ -1,15 +1,15 @@
 class_name playerPhase
 
 enum player_phase
-{	Waiting,
-	Choosing,
-	Thinking,
-	Placing,
-	Discarding,
-	RoundOver
+{	WAITING,
+	CHOOSING,
+	THINKING,
+	PLACING,
+	DISCARDING,
+	ROUNDOVER
 };
 var player_phase_labels = ["Waiting", "Choosing", "Thinking","Placing", "Discarding","Round Over"]
-var current_phase : player_phase = player_phase.Waiting 
+var current_phase : player_phase = player_phase.WAITING 
 
 func get_phase():
 	return current_phase

@@ -4,6 +4,9 @@ enum Suit {spades, hearts, diamonds, clubs};
 
 var number : int
 var suit : Suit
+var texrect_card_scene : PackedScene = preload("res://Scenes/Card/scrollview_card.tscn")
+var sprite_card_scene : PackedScene = preload("res://Scenes/Card/card.tscn")
+
 
 
 func _init(number : int, suit : Suit):
@@ -40,14 +43,11 @@ func get_card_resource():
 	var suit_str : String
 	match suit:
 		Suit.spades:
-			suit_str = ".5"
+			suit_str = "spade"
 		Suit.hearts:
-			suit_str = ".2"
+			suit_str = "heart"
 		Suit.diamonds:
-			suit_str = ".4"
+			suit_str = "diamond"
 		Suit.clubs:
-			suit_str = ".7"
-	
-	
-			
-	return "res://Card Assets/" + str(number) + suit_str + ".png"
+			suit_str = "club"			
+	return "res://Card Assets/" + str(number) + "_" + suit_str + ".png"

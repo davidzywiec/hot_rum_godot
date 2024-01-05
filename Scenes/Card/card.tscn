@@ -1,13 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://tdwxkqtswnnj"]
 
 [ext_resource type="Script" path="res://Scenes/Card/card_sprite_controller.gd" id="1_7rjjv"]
-[ext_resource type="Material" uid="uid://ceeou4j5ku5fl" path="res://Shaders/new_shader_material.tres" id="1_xloae"]
+[ext_resource type="Texture2D" uid="uid://cwj12yus1f7jq" path="res://Card Assets/card_back.png" id="2_svdjr"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dgq3o"]
-load_path = "res://.godot/imported/Back1.png-41131500a954b8857993c9292815c918.ctex"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qsffc"]
+size = Vector2(96, 138)
 
 [node name="Card2D" type="Sprite2D" groups=["selectable_card"]]
-material = ExtResource("1_xloae")
-scale = Vector2(2, 2)
-texture = SubResource("CompressedTexture2D_dgq3o")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_svdjr")
 script = ExtResource("1_7rjjv")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_qsffc")
