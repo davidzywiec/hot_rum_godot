@@ -79,6 +79,7 @@ func request_card():
 
 func discard_card():
 	emit_signal("card_action_signal", CardActions.Action.DISCARD, player_index)
+	discard_button.get_parent().reset_card()
 
 func hide_buttons():
 	btn_container.visible = false

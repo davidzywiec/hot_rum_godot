@@ -18,7 +18,7 @@ func set_discard_card() -> Card:
 
 
 func emit_card_action(player_phase : playerPhase.player_phase):
-	print("Emitting signal...")
+	print("Player " + str(parent.player_index) + "Emitting signal...")
 	if player_phase != playerPhase.player_phase.DISCARDING:
 		emit_signal("card_action_signal", CardActions.Action.DRAW, parent.player_index)
 	else:

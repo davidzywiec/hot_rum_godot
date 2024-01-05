@@ -38,6 +38,7 @@ func set_rules_text():
 	if game_ui.has_method("on_update_label_text"):
 		game_ui.on_update_label_text(rules_mgr.get_current_rule(current_round))
 
+
 #Set the current player phase
 func set_current_player_phase(phase : playerPhase.player_phase):
 	if phase == playerPhase.player_phase.DISCARDING  && game_controller.players[current_player].is_player:
@@ -55,7 +56,10 @@ func set_current_player_phase(phase : playerPhase.player_phase):
 	#Call UI player to pick up card.
 	game_ui.ask_player_to_pick_card(game_controller.players[current_player].is_player)
 
+
 func next_player():
+	if check_end_round(current_player):
+		return
 	#Increment the current player.
 	current_player += 1
 	#If the current player is greater than the player count, reset the current player to 0.
@@ -76,8 +80,13 @@ func next_player():
 		if ai_agent.has_method("emit_card_action"):
 			ai_agent.emit_card_action(playerPhase.player_phase.CHOOSING)
 
-
-
-
+#Check if the round is over
+func check_end_round(player_index : int) -> bool:
+	print("Checking if round is over...")
+	if game_controller.players[player_index].hand.card_array.size() == 0:
+		print("Player " + str(player_index) + " has won the round.")
+		return true
+	return false
+		
 
 	

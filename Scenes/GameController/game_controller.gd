@@ -5,6 +5,9 @@ class_name GameController
 @onready var game_ui := $"../UIController"
 @onready var player_controller := $"../PlayerController"
 @onready var card_action_controller := $"../CardActionController"
+#Round Controller
+@onready var roundControllerScene = preload("res://Scenes/GameController/round_controller.tscn")
+var current_round_controller
 
 @onready var game_phase = GamePhase.new()
 @onready var players = get_tree().get_nodes_in_group("Player")
@@ -14,16 +17,13 @@ class_name GameController
 @onready var deck_area = get_tree().get_first_node_in_group("Deck Area") as Node2D
 @onready var discard_card = get_tree().get_first_node_in_group("Discard Card") as Sprite2D
 @export var default_card : Texture2D
+@onready var mouse_holder = get_tree().get_first_node_in_group("mouse_holder")
 
 #Pickup Settings
 @onready var pickup_card_timer = $PickUpTimer
 @export var pickup_card_time: float = 20.0
 var player_pickup_request : Array[bool] = [false, false, false, false]
 var players_picked_up = 0
-
-#Round Controller
-@onready var roundControllerScene = preload("res://Scenes/GameController/round_controller.tscn")
-var current_round_controller
 
 #Debugging labels
 @onready var gamePhaseLabel = $"../../GamePhase"
@@ -88,7 +88,7 @@ func initalizePickupSequence():
 			continue
 		#If the player in the list is the user then ask the user to pick a card.
 		elif players[index].is_player:
-			player_pickup_request[index] = game_ui.ask_player_to_pick_card(false)
+			game_ui.ask_player_to_pick_card(false)
 		#If the player in the list not the user then ask the AI to pick a card.
 		else:
 			players[index].request_pickup(current_discard_card)
@@ -125,27 +125,23 @@ func set_discard_card(new_card : Card, first_card : bool):
 		discard_card.texture = load(new_card.get_card_resource())
 
 #Send the player the current card.
-func send_player_card(card :Card):
-	pass
+func send_player_card(card :Card, player_index: int):
 	#Send the card to the player.
-	players[current_player].get_new_card(card)
+	players[player_index].get_new_card(card)
 
-#Print the current cards in the discard pile
-func print_discard_pile():
-	print("Discard Pile: " + str(discard_pile.size()) + " cards")
-	for card in discard_pile:
-		print(card)
-	
 
 #When the timer is up, decide the next move. 
 func _pickup_card_timeout():
 	#If all players pass than the current player can draw a card from the deck.
 	#If a player requests to pickup the card, than decide who has first priority. Than the current player can draw a card from the deck.
 	if !player_pickup_request.has(true):
-		card_action_controller.draw_card()
+		card_action_controller.draw_card(current_round_controller.current_player)
 	else:
 		var priority_player = get_first_priority_player()
 		print("Priority Player: " + str(players[priority_player].name))
+		card_action_controller.take_card(priority_player)
+		card_action_controller.draw_card(priority_player)
+
 
 func get_first_priority_player() -> int:
 	var current_index = current_round_controller.current_player + 1
@@ -200,13 +196,14 @@ func player_action(action : CardActions.Action, player: int):
 		match action:
 			CardActions.Action.TAKE:
 				print("Player " + str(player+1) + " current turn. Requested to Pick up")
-				card_action_controller.take_card()				
+				card_action_controller.take_card(player)				
 			CardActions.Action.DRAW:
 				print("Player " + str(player+1) + " current turn. Requested to Draw")
 				initalizePickupSequence()
 			CardActions.Action.DISCARD:
 				print("Player " + str(player+1) + " current turn. Requested to Discard")
 				card_action_controller.discard_card()
+
 			_:
 				print("Invalid Selection made by player.")
 	#If the current player is not the user than check if the player is an AI or a player.
@@ -221,3 +218,10 @@ func player_action(action : CardActions.Action, player: int):
 				set_pass_request(player, false, action)
 			_:
 				print("Invalid Selection made by player.")
+
+#DEBUGGING FUNCTIONS BELOW
+#Print the current cards in the discard pile
+func print_discard_pile():
+	print("Discard Pile: " + str(discard_pile.size()) + " cards")
+	for card in discard_pile:
+		print(card)

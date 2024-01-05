@@ -36,3 +36,8 @@ func toggle_active(toggle: bool):
 
 func get_card():
 	return current_card
+
+func reset_card():
+	self.texture = default_card
+	current_card = null
+	confirm_button.visible = false
