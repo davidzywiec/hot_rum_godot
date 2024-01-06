@@ -88,6 +88,7 @@ func initalizePickupSequence():
 			continue
 		#If the player in the list is the user then ask the user to pick a card.
 		elif players[index].is_player:
+			print("Ask Player if they want to pick up the card. Show UI.")
 			game_ui.ask_player_to_pick_card(false)
 		#If the player in the list not the user then ask the AI to pick a card.
 		else:
@@ -144,7 +145,7 @@ func _pickup_card_timeout():
 
 
 func get_first_priority_player() -> int:
-	var current_index = current_round_controller.current_player + 1
+	var current_index = current_round_controller.current_player + 1 if current_round_controller.current_player + 1 < players.size()-1 else 0
 	for index in range(players.size()):
 		print("Current Index: " + str(current_index))
 		if player_pickup_request[current_index]:

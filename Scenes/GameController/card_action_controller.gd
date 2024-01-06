@@ -38,6 +38,6 @@ func discard_card():
 		game_ui.toggle_discard_area(false)
 		#Remove card from MouseHolder
 		if game_controller.mouse_holder.get_child(0):
-			game_controller.mouse_holder.get_child(0).queue_free()
+			game_controller.mouse_holder.remove_card()
 			
 	game_controller.current_round_controller.next_player()

@@ -81,12 +81,15 @@ func discard_card():
 	emit_signal("card_action_signal", CardActions.Action.DISCARD, player_index)
 	discard_button.get_parent().reset_card()
 
+
 func hide_buttons():
-	btn_container.visible = false
+	for node in btn_container.get_children():
+		node.visible = false
 
 
 func show_buttons():
-	btn_container.visible = true
+	for node in btn_container.get_children():
+		node.visible = true
 
 
 func ask_player_to_pick_card(player_turn : bool):
@@ -101,19 +104,24 @@ func ask_player_to_pick_card(player_turn : bool):
 		pass_button.visible = true
 		req_button.visible = true
 
+
 func hide_pickup_rules():
 	pu_turn_rule.visible = false
 	pu_non_turn_rule.visible = false
 
+
 func update_pickup_timer_label(time_left : float):
 	pickup_timer_label.text = str(time_left).pad_decimals(1).pad_zeros(1)
+
 
 func toggle_pickup_timer_label(toggle : bool):
 	pickup_timer_label.visible = toggle
 
+
 func update_player_action(player_index : int, action_name : String):
 	player_area[player_index].get_node("ActionLabel").text = action_name
 	player_area[player_index].get_node("ActionLabel").visible = true
+
 
 func clear_player_action():
 	for node in player_area:
@@ -131,15 +139,18 @@ func toggle_discard_area(toggle : bool):
 	if discard_area.has_method("toggle_active"):
 		discard_area.toggle_active(toggle)
 
+
 func toggle_lock_discard_area(toggle: bool):
 	discard_button.disabled = toggle
 	if discard_area.has_method("toggle_lock"):
 		discard_area.toggle_lock(toggle)
 
+
 func get_discard_card() -> Card:
 	if discard_area.has_method("get_card"):
 		return discard_area.get_card()
 	return null
+
 
 func set_current_player(current_player_index: int):
 	var index = 0
