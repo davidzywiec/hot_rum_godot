@@ -121,6 +121,7 @@ func toggle_pickup_timer_label(toggle : bool):
 func update_player_action(player_index : int, action_name : String):
 	player_area[player_index].get_node("ActionLabel").text = action_name
 	player_area[player_index].get_node("ActionLabel").visible = true
+	
 
 
 func clear_player_action():

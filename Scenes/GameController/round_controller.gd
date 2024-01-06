@@ -58,6 +58,10 @@ func set_current_player_phase(phase : playerPhase.player_phase):
 
 
 func next_player():
+	
+	#Clear out UI for request actions
+	game_ui.clear_player_action()
+	
 	if check_end_round(current_player):
 		return
 	#Increment the current player.
