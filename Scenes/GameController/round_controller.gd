@@ -54,7 +54,7 @@ func set_current_player_phase(phase : playerPhase.player_phase):
 	
 	game_controller.player_phases[current_player].set_phase(phase)
 	#Call UI player to pick up card.
-	game_ui.ask_player_to_pick_card(game_controller.players[current_player].is_player)
+	game_ui.ask_player_to_pick_card(true, game_controller.players[current_player].is_player)
 
 
 func next_player():
@@ -71,9 +71,9 @@ func next_player():
 		current_player = 0
 	#If current player is not the user than hide buttons.
 	if !game_controller.players[current_player].is_player:
-		game_ui.hide_buttons()
+		game_ui.ask_player_to_pick_card(true, false)
 	else:
-		game_ui.show_buttons()
+		game_ui.ask_player_to_pick_card(true, true)
 	#Set the current player phase to the next phase.
 	set_current_player_phase(playerPhase.player_phase.CHOOSING)
 	game_ui.set_current_player(current_player)

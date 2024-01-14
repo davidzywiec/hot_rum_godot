@@ -89,7 +89,7 @@ func initalizePickupSequence():
 		#If the player in the list is the user then ask the user to pick a card.
 		elif players[index].is_player:
 			print("Ask Player if they want to pick up the card. Show UI.")
-			game_ui.ask_player_to_pick_card(false)
+			game_ui.ask_player_to_pick_card(true, false)
 		#If the player in the list not the user then ask the AI to pick a card.
 		else:
 			players[index].request_pickup(current_discard_card)
@@ -136,7 +136,12 @@ func _pickup_card_timeout():
 	#If all players pass than the current player can draw a card from the deck.
 	#If a player requests to pickup the card, than decide who has first priority. Than the current player can draw a card from the deck.
 	if !player_pickup_request.has(true):
+		for index in players.size()-1:
+			if player_pickup_request[index] == false: 
+				game_ui.update_player_action(index, CardActions.get_action_string(CardActions.Action.PASS))
+		
 		card_action_controller.draw_card(current_round_controller.current_player)
+		
 	else:
 		var priority_player = get_first_priority_player()
 		print("Priority Player: " + str(players[priority_player].name))
@@ -165,7 +170,8 @@ func set_pass_request(player : int, request : bool, player_action : CardActions.
 func player_action_timer():
 	if pickup_card_timer.time_left <= 0.0:
 		game_ui.toggle_pickup_timer_label(false)
-	elif players_picked_up == players.size():
+			
+	elif players_picked_up == players.size()-1:
 		print("All players sent action")
 		pickup_card_timer.stop()
 		_pickup_card_timeout()

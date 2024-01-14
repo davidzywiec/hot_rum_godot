@@ -11,7 +11,7 @@ func draw_card(player):
 	game_controller.send_player_card(drawn_card, player)
 	game_controller.current_round_controller.set_current_player_phase(playerPhase.player_phase.DISCARDING)
 	#Set the UI to not show the actions.
-	game_ui.hide_buttons()
+	game_ui.ask_player_to_pick_card(false, true)
 
 
 #Take the card from the discard pile
@@ -37,7 +37,7 @@ func discard_card():
 		game_ui.toggle_lock_discard_area(false)
 		game_ui.toggle_discard_area(false)
 		#Remove card from MouseHolder
-		if game_controller.mouse_holder.get_child(0):
+		if game_controller.mouse_holder.get_child_count() > 0:
 			game_controller.mouse_holder.remove_card()
 			
 	game_controller.current_round_controller.next_player()

@@ -71,38 +71,36 @@ func take_card():
 	draw_button.visible = false
 	hide_pickup_rules()
 
+
 func request_card():
 	emit_signal("card_action_signal", CardActions.Action.REQUEST, player_index)
 	pass_button.visible = false
 	req_button.visible = false
 	hide_pickup_rules()
 
+
 func discard_card():
 	emit_signal("card_action_signal", CardActions.Action.DISCARD, player_index)
 	discard_button.get_parent().reset_card()
+ 
 
 
-func hide_buttons():
-	for node in btn_container.get_children():
-		node.visible = false
-
-
-func show_buttons():
-	for node in btn_container.get_children():
-		node.visible = true
-
-
-func ask_player_to_pick_card(player_turn : bool):
+func ask_player_to_pick_card(toggle: bool,player_turn : bool):
 	if player_turn:
-		pu_turn_rule.visible = true
+		pu_turn_rule.visible = toggle
 		pu_non_turn_rule.visible = false
-		draw_button.visible = true
-		take_button.visible = true
+		draw_button.visible = toggle
+		take_button.visible = toggle
+		pass_button.visible = false
+		req_button.visible = false
+
 	else:
 		pu_turn_rule.visible = false
-		pu_non_turn_rule.visible = true
-		pass_button.visible = true
-		req_button.visible = true
+		pu_non_turn_rule.visible = toggle
+		pass_button.visible = toggle
+		req_button.visible = toggle
+		draw_button.visible = false
+		take_button.visible = false
 
 
 func hide_pickup_rules():
