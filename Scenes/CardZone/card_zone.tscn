@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://da6qi24m4nly"]
+
+[ext_resource type="Script" path="res://Scenes/CardZone/card_zone.gd" id="1_a6pf3"]
+[ext_resource type="Texture2D" uid="uid://e6eahj2380kh" path="res://Card Assets/CardZone/card_zone.png" id="1_m7i1w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6k6i"]
+size = Vector2(579, 190)
+
+[node name="CardZone" type="Node2D"]
+script = ExtResource("1_a6pf3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(10, 10)
+texture = ExtResource("1_m7i1w")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PlayZone1" type="Area2D" parent="." groups=["play_zone"]]
+position = Vector2(-2, -199)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayZone1"]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_s6k6i")
+
+[node name="Zone_Label" type="Label" parent="PlayZone1"]
+offset_right = 40.0
+offset_bottom = 26.0
+text = "SET"
+horizontal_alignment = 1
+
+[node name="PlayZone2" type="Area2D" parent="." groups=["play_zone"]]
+position = Vector2(-2, -11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayZone2"]
+position = Vector2(3, 6)
+shape = SubResource("RectangleShape2D_s6k6i")
+
+[node name="Zone_Label" type="Label" parent="PlayZone2"]
+offset_right = 40.0
+offset_bottom = 26.0
+text = "SET"
+horizontal_alignment = 1
+
+[node name="PlayZone3" type="Area2D" parent="." groups=["play_zone"]]
+position = Vector2(-2, 189)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayZone3"]
+position = Vector2(3, 6)
+shape = SubResource("RectangleShape2D_s6k6i")
+
+[node name="Zone_Label" type="Label" parent="PlayZone3"]
+offset_right = 40.0
+offset_bottom = 26.0
+text = "SET"
+horizontal_alignment = 1
