@@ -1,6 +1,6 @@
 extends Control
 
-@onready var long_rule_label : Label = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/LongRuleText
+@onready var long_rule_label : Label = $RulePanelContainer/HBoxContainer/LongRuleText
 @onready var start_button: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/StartButton
 @onready var draw_button: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/DrawCard
 @onready var req_button: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/RequestCard
@@ -8,6 +8,7 @@ extends Control
 @onready var take_button: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/TakeCard
 @onready var btn_container: VBoxContainer = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer
 var discard_button : Button
+@onready var panel_container: PanelContainer = $MarginContainer/PanelContainer
 #Pickup Rules
 @onready var pu_non_turn_rule : Label = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/PickupCardOutOfTurn
 @onready var pu_turn_rule : Label = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/PickupCardOnTurn
@@ -86,6 +87,7 @@ func discard_card():
 
 
 func ask_player_to_pick_card(toggle: bool,player_turn : bool):
+	panel_container.visible = toggle
 	if player_turn:
 		pu_turn_rule.visible = toggle
 		pu_non_turn_rule.visible = false
@@ -106,6 +108,7 @@ func ask_player_to_pick_card(toggle: bool,player_turn : bool):
 func hide_pickup_rules():
 	pu_turn_rule.visible = false
 	pu_non_turn_rule.visible = false
+	panel_container.visible = false
 
 
 func update_pickup_timer_label(time_left : float):
@@ -114,6 +117,7 @@ func update_pickup_timer_label(time_left : float):
 
 func toggle_pickup_timer_label(toggle : bool):
 	pickup_timer_label.visible = toggle
+
 
 
 func update_player_action(player_index : int, action_name : String):

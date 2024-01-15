@@ -33,6 +33,6 @@ window/dpi/allow_hidpi=false
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0, 0.294118, 0.556863, 1)
+environment/defaults/default_clear_color=Color(0.388235, 0.431373, 0.447059, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/sdf/scale=0

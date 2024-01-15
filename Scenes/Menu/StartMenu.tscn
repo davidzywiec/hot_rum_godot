@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbavlfxcnswj4"]
+
+[ext_resource type="Script" path="res://Scenes/Menu/StartMenu.gd" id="1_08q8q"]
+[ext_resource type="Theme" uid="uid://b7oei08fdqkj2" path="res://Scenes/Theme/theme.tres" id="1_xnlin"]
+
+[node name="StartMenu" type="Node2D"]
+script = ExtResource("1_08q8q")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Menu" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="Menu"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xnlin")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="Menu/Panel"]
+layout_mode = 2
+offset_left = 878.0
+offset_top = 428.0
+offset_right = 1042.0
+offset_bottom = 652.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="StartBtn" type="Button" parent="Menu/Panel/ButtonContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="Settings" type="Button" parent="Menu/Panel/ButtonContainer"]
+layout_mode = 2
+text = "Setting"
+
+[node name="Exit" type="Button" parent="Menu/Panel/ButtonContainer"]
+layout_mode = 2
+text = "Exit"

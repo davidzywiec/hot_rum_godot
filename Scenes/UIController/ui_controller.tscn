@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq03h23u2qvym"]
+[gd_scene load_steps=5 format=3 uid="uid://cq03h23u2qvym"]
 
 [ext_resource type="Script" path="res://Scenes/UIController/ui_controller.gd" id="1_hawa8"]
 [ext_resource type="Theme" uid="uid://b7oei08fdqkj2" path="res://Scenes/Theme/theme.tres" id="2_cx87y"]
+[ext_resource type="Script" path="res://Scenes/UIController/RulePanelContainer.gd" id="3_fxenf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lwh1o"]
+font_size = 12
 
 [node name="UIController" type="Control"]
 layout_mode = 3
@@ -16,8 +20,10 @@ current_player_color = Color(0.619608, 0.937255, 0.0313726, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 448.0
+offset_top = 544.0
+offset_right = 747.0
+offset_bottom = 656.0
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
@@ -49,10 +55,6 @@ visible = false
 layout_mode = 2
 text = "You may pickup the card but you will not be able to draw from the deck."
 
-[node name="LongRuleText" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
-layout_mode = 2
-text = "Press the Start Game to begin."
-
 [node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 
@@ -77,6 +79,12 @@ size_flags_vertical = 4
 text = "RequestCard"
 icon_alignment = 1
 
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/RequestCard"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 36.0
+text = "+1"
+
 [node name="TakeCard" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer"]
 visible = false
 layout_mode = 2
@@ -89,6 +97,7 @@ layout_mode = 2
 text = "Pass Card"
 
 [node name="PickupCountDown" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "5"
@@ -96,71 +105,183 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlayerContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_left = 1470.0
-offset_top = 23.0
-offset_right = 1905.0
-offset_bottom = 402.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme = ExtResource("2_cx87y")
 
-[node name="PlayerArea" type="VBoxContainer" parent="PlayerContainer"]
+[node name="Panel" type="Panel" parent="PlayerContainer"]
+layout_mode = 2
+theme = ExtResource("2_cx87y")
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="PlayerArea" type="HBoxContainer" parent="PlayerContainer/Panel/MarginContainer"]
+layout_direction = 2
 layout_mode = 2
 
-[node name="PlayerContainer" type="HBoxContainer" parent="PlayerContainer/PlayerArea" groups=["UIPlayerArea"]]
+[node name="PanelContainer" type="PanelContainer" parent="PlayerContainer/Panel/MarginContainer/PlayerArea"]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="PlayerName" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer"]
+[node name="PlayerContainer" type="HBoxContainer" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer" groups=["UIPlayerArea"]]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_cx87y")
+
+[node name="ActionLabel" type="Label" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer/PlayerContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pass"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerName" type="Label" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer/PlayerContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 text = "Player 1"
 
-[node name="ActionLabel" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer"]
-visible = false
+[node name="CardCount" type="Label" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer/PlayerContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="PlayerContainer/Panel/MarginContainer/PlayerArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerContainer2" type="HBoxContainer" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer2" groups=["UIPlayerArea"]]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ActionLabel" type="Label" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer2/PlayerContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pass"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
-[node name="PlayerContainer2" type="HBoxContainer" parent="PlayerContainer/PlayerArea" groups=["UIPlayerArea"]]
-layout_mode = 2
-
-[node name="PlayerName" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer2"]
+[node name="PlayerName" type="Label" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer2/PlayerContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 text = "Player 2  [BOT]"
 
-[node name="ActionLabel" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer2"]
-visible = false
+[node name="CardCount" type="Label" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer2/PlayerContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer3" type="PanelContainer" parent="PlayerContainer/Panel/MarginContainer/PlayerArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerContainer3" type="HBoxContainer" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer3" groups=["UIPlayerArea"]]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ActionLabel" type="Label" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer3/PlayerContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pass"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="PlayerContainer3" type="HBoxContainer" parent="PlayerContainer/PlayerArea" groups=["UIPlayerArea"]]
-layout_mode = 2
-
-[node name="PlayerName" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer3"]
+[node name="PlayerName" type="Label" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer3/PlayerContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 text = "Player 3  [BOT]"
 
-[node name="ActionLabel" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer3"]
-visible = false
+[node name="CardCount" type="Label" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer3/PlayerContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer4" type="PanelContainer" parent="PlayerContainer/Panel/MarginContainer/PlayerArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerContainer4" type="HBoxContainer" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer4" groups=["UIPlayerArea"]]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ActionLabel" type="Label" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer4/PlayerContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pass"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="PlayerContainer4" type="HBoxContainer" parent="PlayerContainer/PlayerArea" groups=["UIPlayerArea"]]
-layout_mode = 2
-
-[node name="PlayerName" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer4"]
+[node name="PlayerName" type="Label" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer4/PlayerContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 text = "Player 4  [BOT]"
 
-[node name="ActionLabel" type="Label" parent="PlayerContainer/PlayerArea/PlayerContainer4"]
-visible = false
+[node name="CardCount" type="Label" parent="PlayerContainer/Panel/MarginContainer/PlayerArea/PanelContainer4/PlayerContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Pass"
+size_flags_stretch_ratio = 0.5
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RulePanelContainer" type="PanelContainer" parent="."]
+layout_direction = 3
+layout_mode = 0
+offset_top = 272.0
+offset_right = 100.0
+offset_bottom = 372.0
+script = ExtResource("3_fxenf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RulePanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="LongRuleText" type="Label" parent="RulePanelContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Start the game to play Hot Rum"
+
+[node name="Button" type="Button" parent="RulePanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+text = "<"
+
+[node name="Label" type="Label" parent="RulePanelContainer/HBoxContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_right = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Help"
+label_settings = SubResource("LabelSettings_lwh1o")
+horizontal_alignment = 1
+vertical_alignment = 2

@@ -31,17 +31,23 @@ texture = ExtResource("7_4l4au")
 position = Vector2(-905, 86)
 
 [node name="UIController" parent="Controllers" groups=["UIController"] instance=ExtResource("3_dbdis")]
-size_flags_horizontal = 4
+top_level = true
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1920.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="PlayerController" parent="Controllers" instance=ExtResource("4_5xvfn")]
 
 [node name="CardActionController" parent="Controllers" instance=ExtResource("5_28df7")]
 
 [node name="Deck Area" type="Node2D" parent="." groups=["Deck Area"]]
-position = Vector2(960, 461)
+position = Vector2(960, 119)
 
 [node name="DiscardCard" type="Sprite2D" parent="Deck Area" groups=["Discard Card"]]
-texture = ExtResource("5_tgo0f")
+texture = ExtResource("5_cb7lu")
 
 [node name="DeckCard" type="Sprite2D" parent="Deck Area" groups=["Discard Card"]]
 position = Vector2(-104, 0)
