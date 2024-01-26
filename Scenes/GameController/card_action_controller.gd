@@ -16,7 +16,7 @@ func draw_card(player):
 
 #Take the card from the discard pile
 func take_card(player):
-	var drawn_card = game_controller.discard_pile.pop_back()	
+	var drawn_card = GlobalController.discard_pile.pop_back()	
 	#Set the current discard card to null.
 	game_controller.set_discard_card(null, false)
 	game_controller.send_player_card(drawn_card, player)

@@ -1,7 +1,7 @@
 extends PanelContainer
 
-@onready var showButton : Button = $HBoxContainer/Button
-@onready var long_text : Label = $HBoxContainer/LongRuleText
+@onready var showButton : Button = $MarginContainer2/HBoxContainer/Button
+@onready var long_text : Label = $MarginContainer2/HBoxContainer/LongRuleText
 
 func _ready():
 	showButton.pressed.connect(toggle_button)

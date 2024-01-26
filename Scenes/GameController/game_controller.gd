@@ -9,7 +9,6 @@ class_name GameController
 @onready var roundControllerScene = preload("res://Scenes/GameController/round_controller.tscn")
 var current_round_controller
 
-@onready var game_phase = GamePhase.new()
 @onready var players = get_tree().get_nodes_in_group("Player")
 @onready var player_phases : Array[playerPhase] = [playerPhase.new(), playerPhase.new(), playerPhase.new(), playerPhase.new()]
 @onready var deck = Deck.new()
@@ -22,22 +21,11 @@ var current_round_controller
 #Pickup Settings
 @onready var pickup_card_timer = $PickUpTimer
 @export var pickup_card_time: float = 20.0
-var player_pickup_request : Array[bool] = [false, false, false, false]
-var players_picked_up = 0
+
 
 #Debugging labels
 @onready var gamePhaseLabel = $"../../GamePhase"
 @onready var playerPhaseLabel = $"../../PlayerPhase"
-
-#Discard pile variables
-var discard_pile : Array = []
-var current_discard_card : Card
-
-#Player variables
-var current_player : int = 0
-var player_count = 0
-var round_index = -1
-var round_card_number = [7,8,9,10,11,11,12,13]
 
 
 #Define a signal for the game controller to emit to update the rule text.
@@ -51,10 +39,11 @@ func _ready():
 	game_ui.start_game_signal.connect(start_game)
 	game_ui.card_action_signal.connect(player_card_action)
 	pickup_card_timer.timeout.connect(_pickup_card_timeout)
+	
 
 #Process every frame
 func _process(delta):
-	gamePhaseLabel.text = game_phase.get_phase_label()
+	gamePhaseLabel.text = GlobalController.game_phase.get_phase_label()
 	if current_round_controller != null:
 		playerPhaseLabel.text = player_phases[current_round_controller.current_player].get_phase_label()
 	#Check if the timer is running and update the label.
@@ -63,7 +52,7 @@ func _process(delta):
 
 #Start the game
 func start_game():
-	game_phase.next_phase()
+	GlobalController.game_phase.next_phase()
 	call_deferred("_initialize_new_round")
 	connect_players()
 
@@ -73,7 +62,8 @@ func _initialize_new_round():
 	if current_round_controller != null:
 		current_round_controller.queue_free()
 	current_round_controller = roundControllerScene.instantiate()
-	current_round_controller.current_round = round_index + 1
+	GlobalController.round_index += 1
+	current_round_controller.current_round = GlobalController.round_index
 	get_parent().add_child(current_round_controller)
 	current_round_controller.start_round()
 	current_round_controller.set_current_player_phase(playerPhase.player_phase.CHOOSING)
@@ -92,7 +82,7 @@ func initalizePickupSequence():
 			game_ui.ask_player_to_pick_card(true, false)
 		#If the player in the list not the user then ask the AI to pick a card.
 		else:
-			players[index].request_pickup(current_discard_card)
+			players[index].request_pickup(GlobalController.current_discard_card)
 			var player_action = players[index].pass_action
 			if player_action == CardActions.Action.REQUEST:
 				set_pass_request(index, true, player_action)
@@ -108,21 +98,21 @@ func initalizePickupSequence():
 #Set the discard card based on pickup or put down
 func set_discard_card(new_card : Card, first_card : bool):
 	if new_card == null && !first_card:
-		if discard_pile.size() <= 0:
+		if GlobalController.discard_pile.size() <= 0:
 			discard_card.texture = default_card
-			current_discard_card = null
+			GlobalController.current_discard_card = null
 		else:
-			discard_card.texture = load(discard_pile[discard_pile.size()-1].get_card_resource())
-			current_discard_card = discard_pile[discard_pile.size()-1]
+			discard_card.texture = load(GlobalController.discard_pile[GlobalController.discard_pile.size()-1].get_card_resource())
+			GlobalController.current_discard_card = GlobalController.discard_pile[GlobalController.discard_pile.size()-1]
 	else:
 		#If first card then pick from deck and set the next phase
 		if first_card:
-			current_discard_card = deck.deal_card()
-			new_card = current_discard_card
-			game_phase.next_phase()
+			GlobalController.current_discard_card = deck.deal_card()
+			new_card = GlobalController.current_discard_card
+			GlobalController.game_phase.next_phase()
 
-		discard_pile.append(new_card as Card)
-		#Set the discard pile sprite to the last card in the discard_pile deck.
+		GlobalController.discard_pile.append(new_card as Card)
+		#Set the discard pile sprite to the last card in the GlobalController.discard_pile deck.
 		discard_card.texture = load(new_card.get_card_resource())
 
 #Send the player the current card.
@@ -135,9 +125,9 @@ func send_player_card(card :Card, player_index: int):
 func _pickup_card_timeout():
 	#If all players pass than the current player can draw a card from the deck.
 	#If a player requests to pickup the card, than decide who has first priority. Than the current player can draw a card from the deck.
-	if !player_pickup_request.has(true):
+	if !GlobalController.player_pickup_request.has(true):
 		for index in players.size()-1:
-			if player_pickup_request[index] == false: 
+			if GlobalController.player_pickup_request[index] == false: 
 				game_ui.update_player_action(index, CardActions.get_action_string(CardActions.Action.PASS))
 		
 		card_action_controller.draw_card(current_round_controller.current_player)
@@ -153,7 +143,7 @@ func get_first_priority_player() -> int:
 	var current_index = current_round_controller.current_player + 1 if current_round_controller.current_player + 1 < players.size()-1 else 0
 	for index in range(players.size()):
 		print("Current Index: " + str(current_index))
-		if player_pickup_request[current_index]:
+		if GlobalController.player_pickup_request[current_index]:
 			print("Player found. Index: " + str(current_index))
 			return current_index
 		current_index += 1
@@ -162,8 +152,8 @@ func get_first_priority_player() -> int:
 	return -1
 
 func set_pass_request(player : int, request : bool, player_action : CardActions.Action):
-	player_pickup_request[player] = request
-	players_picked_up += 1
+	GlobalController.player_pickup_request[player] = request
+	GlobalController.players_picked_up += 1
 	game_ui.update_player_action(player, CardActions.get_action_string(player_action))
 
 
@@ -171,7 +161,7 @@ func player_action_timer():
 	if pickup_card_timer.time_left <= 0.0:
 		game_ui.toggle_pickup_timer_label(false)
 			
-	elif players_picked_up == players.size()-1:
+	elif GlobalController.players_picked_up == players.size()-1:
 		print("All players sent action")
 		pickup_card_timer.stop()
 		_pickup_card_timeout()
@@ -229,6 +219,6 @@ func player_action(action : CardActions.Action, player: int):
 #DEBUGGING FUNCTIONS BELOW
 #Print the current cards in the discard pile
 func print_discard_pile():
-	print("Discard Pile: " + str(discard_pile.size()) + " cards")
-	for card in discard_pile:
+	print("Discard Pile: " + str(GlobalController.discard_pile.size()) + " cards")
+	for card in GlobalController.discard_pile:
 		print(card)

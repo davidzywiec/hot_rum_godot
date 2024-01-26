@@ -1,7 +1,7 @@
 extends Control
 
-@onready var long_rule_label : Label = $RulePanelContainer/HBoxContainer/LongRuleText
-@onready var start_button: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/StartButton
+@onready var long_rule_label : Label = $RulePanelContainer/MarginContainer2/HBoxContainer/LongRuleText
+@onready var deal_cards: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/DealCards
 @onready var draw_button: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/DrawCard
 @onready var req_button: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/RequestCard
 @onready var pass_button: Button = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer/PassCard
@@ -9,6 +9,7 @@ extends Control
 @onready var btn_container: VBoxContainer = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/ButtonContainer
 var discard_button : Button
 @onready var panel_container: PanelContainer = $MarginContainer/PanelContainer
+@onready var card_table_button : Button = $CardTableButton
 #Pickup Rules
 @onready var pu_non_turn_rule : Label = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/PickupCardOutOfTurn
 @onready var pu_turn_rule : Label = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/PickupCardOnTurn
@@ -23,6 +24,9 @@ var discard_button : Button
 @onready var discard_area : Sprite2D = get_tree().get_first_node_in_group("discard_area_sprite")
 
 @export var current_player_color : Color = Color.GREEN
+@onready var cardTableScene : PackedScene = preload("res://Scenes/CardTable/card_table.tscn")
+var card_table_node : Node2D
+@onready var sceneManager = get_tree().get_first_node_in_group("SceneManager")
 
 var player_index : int = 0
 
@@ -30,11 +34,12 @@ signal start_game_signal
 signal card_action_signal(action : CardActions.Action, player_index : int)
 
 func _ready():
-	start_button.pressed.connect(start_game)
+	deal_cards.pressed.connect(start_game)
 	draw_button.pressed.connect(draw_card)
 	pass_button.pressed.connect(pass_card)
 	take_button.pressed.connect(take_card)
 	req_button.pressed.connect(request_card)
+	card_table_button.pressed.connect(move_to_card_table)
 	discard_button = discard_area.get_node("ConfirmDiscard")
 	if discard_button:
 		discard_button.pressed.connect(discard_card)
@@ -50,8 +55,8 @@ func on_update_label_text(label_text):
 
 func start_game():
 	emit_signal("start_game_signal")
-	start_button.disabled = true
-	start_button.visible = false
+	deal_cards.disabled = true
+	deal_cards.visible = false
 	
 
 func draw_card():
@@ -164,3 +169,8 @@ func set_current_player(current_player_index: int):
 			node.get_node("PlayerName").add_theme_color_override("font_color", Color.WHITE)
 		index += 1
 
+func move_to_card_table():
+	if !card_table_node:
+		card_table_node = cardTableScene.instantiate()
+		
+	sceneManager.move_to_next_level(card_table_node, false)

@@ -18,7 +18,7 @@ size = Vector2(93, 134)
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(959, 530)
+position = Vector2(960, 544)
 
 [node name="CardAreaSprite" type="Sprite2D" parent="."]
 visible = false
@@ -32,12 +32,6 @@ position = Vector2(-905, 86)
 
 [node name="UIController" parent="Controllers" groups=["UIController"] instance=ExtResource("3_dbdis")]
 top_level = true
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 1920.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [node name="PlayerController" parent="Controllers" instance=ExtResource("4_5xvfn")]
 

@@ -57,10 +57,11 @@ func set_current_player_phase(phase : playerPhase.player_phase):
 	game_ui.ask_player_to_pick_card(true, game_controller.players[current_player].is_player)
 
 
-func next_player():
-	
+func next_player():	
 	#Clear out UI for request actions
 	game_ui.clear_player_action()
+	#Clear choices
+	GlobalController.clear_requests()
 	
 	if check_end_round(current_player):
 		return

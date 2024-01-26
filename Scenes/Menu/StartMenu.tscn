@@ -48,10 +48,10 @@ alignment = 1
 layout_mode = 2
 text = "Start"
 
-[node name="Settings" type="Button" parent="Menu/Panel/ButtonContainer"]
+[node name="SettingsBtn" type="Button" parent="Menu/Panel/ButtonContainer"]
 layout_mode = 2
 text = "Setting"
 
-[node name="Exit" type="Button" parent="Menu/Panel/ButtonContainer"]
+[node name="ExitBtn" type="Button" parent="Menu/Panel/ButtonContainer"]
 layout_mode = 2
 text = "Exit"

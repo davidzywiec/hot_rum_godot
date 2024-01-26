@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfakft4vvya58"]
+
+[ext_resource type="Texture2D" uid="uid://cwbhdpbma8um4" path="res://icon.svg" id="1_cr02f"]
+
+[node name="CardTable" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(111, 560)
+texture = ExtResource("1_cr02f")
+
+[node name="Icon2" type="Sprite2D" parent="."]
+position = Vector2(974, 934)
+texture = ExtResource("1_cr02f")
+
+[node name="Icon3" type="Sprite2D" parent="."]
+position = Vector2(1787, 478)
+texture = ExtResource("1_cr02f")
+
+[node name="Icon4" type="Sprite2D" parent="."]
+position = Vector2(958, 91)
+texture = ExtResource("1_cr02f")
