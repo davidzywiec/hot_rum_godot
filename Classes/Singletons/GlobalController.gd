@@ -18,6 +18,9 @@ var current_discard_card : Card
 var player_pickup_request : Array[bool] = [false, false, false, false]
 var players_picked_up = 0
 
+#Meld Types
+enum MELD_TYPE { SET, RUN, RUN_OF_7 }
+var meld_type_string : Array = ["Set", "Run", "Run of 7"]
 
 #Send the signal to the GameController and to the UIController to start the game
 func start_game():
@@ -28,3 +31,5 @@ func start_game():
 func clear_requests():
 	player_pickup_request = [false, false, false, false]
 	
+func get_meld_string(meld : MELD_TYPE) -> String:
+	return meld_type_string[meld]

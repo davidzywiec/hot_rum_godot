@@ -1,15 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfakft4vvya58"]
+[gd_scene load_steps=3 format=3 uid="uid://dfakft4vvya58"]
 
+[ext_resource type="Script" path="res://Scenes/CardTable/card_table.gd" id="1_2i5cr"]
 [ext_resource type="Texture2D" uid="uid://cwbhdpbma8um4" path="res://icon.svg" id="1_cr02f"]
 
 [node name="CardTable" type="Node2D"]
+script = ExtResource("1_2i5cr")
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(111, 560)
 texture = ExtResource("1_cr02f")
 
 [node name="Icon2" type="Sprite2D" parent="."]
-position = Vector2(974, 934)
+position = Vector2(964, 907)
 texture = ExtResource("1_cr02f")
 
 [node name="Icon3" type="Sprite2D" parent="."]
@@ -19,3 +21,8 @@ texture = ExtResource("1_cr02f")
 [node name="Icon4" type="Sprite2D" parent="."]
 position = Vector2(958, 91)
 texture = ExtResource("1_cr02f")
+
+[node name="BackBtn" type="Button" parent="."]
+offset_right = 204.0
+offset_bottom = 39.0
+text = "Back"

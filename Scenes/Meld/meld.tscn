@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfb5plpf5yksq"]
+
+[ext_resource type="Script" path="res://Scenes/Meld/meld.gd" id="1_fys04"]
+[ext_resource type="Texture2D" uid="uid://58gv2y2mausi" path="res://Card Assets/CardArea/card_area_sprite.png" id="2_t2c5x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kanni"]
+size = Vector2(362, 170)
+
+[node name="Meld" type="Node2D"]
+position = Vector2(352, 640)
+script = ExtResource("1_fys04")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(172.057, 74.6156)
+scale = Vector2(0.188902, 0.357156)
+texture = ExtResource("2_t2c5x")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 26.0
+text = "Set"
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(171, 75)
+shape = SubResource("RectangleShape2D_kanni")
+
+[node name="CardPos" type="Node2D" parent="."]
+position = Vector2(34.8834, 62.2352)
