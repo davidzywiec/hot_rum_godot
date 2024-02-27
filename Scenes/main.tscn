@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cqsgsg05othu3"]
+[gd_scene load_steps=13 format=3 uid="uid://cqsgsg05othu3"]
 
 [ext_resource type="PackedScene" uid="uid://cp66ortydxrup" path="res://Scenes/GameController/game_controller.tscn" id="1_5j83b"]
 [ext_resource type="PackedScene" uid="uid://b7sg6lhng64lp" path="res://Scenes/Player/player.tscn" id="2_4cx05"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://Scenes/Card/DiscardArea.gd" id="6_yglte"]
 [ext_resource type="Texture2D" uid="uid://58gv2y2mausi" path="res://Card Assets/CardArea/card_area_sprite.png" id="7_4l4au"]
 [ext_resource type="Script" path="res://Scenes/MouseHolder.gd" id="8_nn31v"]
-[ext_resource type="PackedScene" uid="uid://cfb5plpf5yksq" path="res://Scenes/Meld/meld.tscn" id="12_btbox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j63ak"]
 size = Vector2(93, 134)
@@ -104,9 +103,6 @@ player_index = 2
 [node name="Player 4" parent="Players" instance=ExtResource("2_4cx05")]
 visible = false
 player_index = 3
-
-[node name="Meld" parent="." instance=ExtResource("12_btbox")]
-position = Vector2(352, 691.614)
 
 [node name="GamePhase" type="Label" parent="."]
 offset_left = 1772.0

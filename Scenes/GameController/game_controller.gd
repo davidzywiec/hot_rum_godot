@@ -27,7 +27,6 @@ var current_round_controller
 @onready var gamePhaseLabel = $"../../GamePhase"
 @onready var playerPhaseLabel = $"../../PlayerPhase"
 
-
 #Define a signal for the game controller to emit to update the rule text.
 signal update_rule_text(text :String)
 

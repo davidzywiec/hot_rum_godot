@@ -22,9 +22,6 @@ func card_entered(new_area : Area2D):
 		call_deferred("create_card",card)
 
 
-		
-
-
 func card_exited(area : Area2D):
 	var latest_card = cards.pop_back()
 	latest_card.queue_free()

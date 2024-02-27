@@ -95,6 +95,8 @@ func toggle_highlight():
 	else:
 		modulate = Color(1, 1, 1, 1)
 		remove_from_group("selected")
+		
+	GlobalController.get_selected_cards()
 
 func let_card_go():
 	if mouse_holder_node.has_card:
