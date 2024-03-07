@@ -21,6 +21,8 @@ var gridSize = Vector2(20, 2)       # Adjust the number of rows and columns
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
+	if is_player:
+		DataController.player_index = player_index
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -31,7 +33,6 @@ func get_new_card(new_card : Card):
 	hand.add_card(new_card)
 	if is_player:
 		add_card_to_game(false)
-
 
 #Player adds cards to the UI
 func add_card_to_game(all_cards: bool):
@@ -47,6 +48,7 @@ func add_card_to_game(all_cards: bool):
 		var card = hand.card_array[hand.card_array.size()-1]
 		#add_card_to_grid(card)
 		add_cards_to_cardbox_ui(card)
+	DataController.player_hand = hand
 
 
 func add_cards_to_cardbox_ui(card : Card):

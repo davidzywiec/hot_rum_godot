@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://da6qi24m4nly"]
+[gd_scene load_steps=6 format=3 uid="uid://da6qi24m4nly"]
 
 [ext_resource type="Script" path="res://Scenes/CardZone/card_zone.gd" id="1_a6pf3"]
 [ext_resource type="Texture2D" uid="uid://e6eahj2380kh" path="res://Card Assets/CardZone/card_zone.png" id="1_m7i1w"]
+[ext_resource type="PackedScene" uid="uid://tdwxkqtswnnj" path="res://Scenes/Card/card.tscn" id="3_blaar"]
+[ext_resource type="Texture2D" uid="uid://d0hi4wh7xysy2" path="res://Card Assets/1_diamond.png" id="4_6kbbj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s6k6i"]
 size = Vector2(579, 190)
@@ -53,3 +55,20 @@ offset_right = 40.0
 offset_bottom = 26.0
 text = "SET"
 horizontal_alignment = 1
+
+[node name="CardPos" type="Node2D" parent="."]
+position = Vector2(0, 389)
+
+[node name="Card2D" parent="." instance=ExtResource("3_blaar")]
+position = Vector2(1, 389)
+texture = ExtResource("4_6kbbj")
+
+[node name="Card2D2" parent="." instance=ExtResource("3_blaar")]
+position = Vector2(68, 389)
+texture = ExtResource("4_6kbbj")
+
+[node name="Card2D3" parent="." instance=ExtResource("3_blaar")]
+position = Vector2(-63, 387)
+texture = ExtResource("4_6kbbj")
+
+[node name="CursorController" type="Node2D" parent="."]

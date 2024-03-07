@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 CardActions="*res://Classes/Singletons/CardActions.gd"
 GlobalController="*res://Classes/Singletons/GlobalController.gd"
+DataController="*res://Classes/Singletons/DataController.gd"
 
 [display]
 

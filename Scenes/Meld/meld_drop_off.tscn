@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://77b3atmdtrtv"]
+
+[ext_resource type="Script" path="res://Scenes/Meld/meld_drop_off.gd" id="1_8lefd"]
+[ext_resource type="Texture2D" uid="uid://dkfta5iknms2b" path="res://Scenes/CardZone/set_area.png" id="1_hwqx5"]
+[ext_resource type="PackedScene" uid="uid://tdwxkqtswnnj" path="res://Scenes/Card/card.tscn" id="2_qbs6k"]
+[ext_resource type="Script" path="res://Scenes/MouseHolder.gd" id="4_1ujow"]
+
+[node name="MeldDropOff" type="Node2D"]
+script = ExtResource("1_8lefd")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="Card2D3" parent="." instance=ExtResource("2_qbs6k")]
+position = Vector2(253, 134)
+scale = Vector2(1, 1)
+create_fake_card = true
+fake_card_suit = 1
+
+[node name="Card2D" parent="." instance=ExtResource("2_qbs6k")]
+z_index = 1
+position = Vector2(272, 115)
+scale = Vector2(1, 1)
+create_fake_card = true
+fake_card_suit = 0
+order = 2
+
+[node name="Card2D2" parent="." instance=ExtResource("2_qbs6k")]
+z_index = 2
+position = Vector2(230, 95)
+scale = Vector2(1, 1)
+create_fake_card = true
+fake_card_number = 6
+fake_card_suit = 0
+order = 3
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+position = Vector2(1260, 273)
+texture = ExtResource("1_hwqx5")
+
+[node name="MouseHolder" type="Node2D" parent="."]
+script = ExtResource("4_1ujow")

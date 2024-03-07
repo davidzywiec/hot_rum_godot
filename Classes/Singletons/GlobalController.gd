@@ -31,17 +31,19 @@ func start_game():
 func clear_requests():
 	player_pickup_request = [false, false, false, false]
 
-
+#Get meld string
 func get_meld_string(meld : MELD_TYPE) -> String:
 	return meld_type_string[meld]
 	
+
 #Validate if the cards selected can equal a meld that is needed
 func get_selected_cards():
 	var selected_cards = get_tree().get_nodes_in_group("selected")
 	
-	print(check_for_meld(selected_cards, MELD_TYPE.RUN))
+	sort_cards_for_run(selected_cards)
 
-func check_for_meld(cards : Array, meld_type : MELD_TYPE)-> bool:	
+
+func check_for_meld(cards : Array, meld_type : MELD_TYPE)-> bool:
 	#Check if there is a set
 	if meld_type == MELD_TYPE.SET:
 		var set_num = null
@@ -73,11 +75,10 @@ func check_for_meld(cards : Array, meld_type : MELD_TYPE)-> bool:
 			elif run_suit != card.card.suit:
 				return false
 		
-		cards.sort_custom(_compare_cards)
+		sort_cards_for_run(cards)
 		for card in cards:
 			print(card.card)
-
-
+			
 		#Check if they have a valid run
 		if meld_type == MELD_TYPE.RUN and run_cnt >= 4:
 			return true
@@ -86,5 +87,41 @@ func check_for_meld(cards : Array, meld_type : MELD_TYPE)-> bool:
 
 	return false
 
-func _compare_cards(a, b) -> int:
-	return a.card.number - b.card.number
+
+#Sort Array for Run
+func _compare_cards(a, b) -> bool:
+	return a.card.number < b.card.number
+
+
+func sort_cards_for_run(current_array : Array) -> Array:
+	var new_array : Array = []
+	var cards = current_array
+	#Sort them by number using compare cards
+	cards.sort_custom(_compare_cards)
+	#Get indexes for two's and aces
+	var two_array = []
+	var ace_array = []
+	for index in range(cards.size()-1):
+		if cards[index].card.number == 2:
+			two_array.append(cards.pop_at(index))
+		if cards[index].card.number == 1:
+			ace_array.append(cards.pop_at(index))
+	print("No 2's should exist: ")
+
+
+	#Loop through the array, and move the index of a two if the previous card has a gap
+	var previous_num = null
+	var nIndex = 0
+	for card in cards:
+		if previous_num == null:
+			pass
+		elif previous_num != card.card.number-1 and two_array.size() > 0:
+			new_array.append(two_array.pop_front())
+			
+		new_array.append(card)
+		previous_num = card.card.number
+		nIndex+=1
+	for c in new_array:
+		print(c.card)
+		
+	return new_array
