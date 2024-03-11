@@ -4,10 +4,14 @@ extends Node2D
 @onready var mouse_holder : Node2D = $MouseHolder
 @onready var test_meld : Area2D = $MeldCardArea
 
+@onready var starting_pos : Vector2 = $ResetPos.position
+@export var starting_offset : Vector2 = Vector2(50,0)
+var current_offset : Vector2 = Vector2.ZERO 
 
 
 func _ready():
 	test_meld.area_entered.connect(test_meld.entered_meld_card)
+	current_offset = starting_pos
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
@@ -45,6 +49,7 @@ func add_card_to_mouse_holder(card_node):
 	mouse_holder.add_child(card_node)
 	card_node.set_position(Vector2.ZERO)
 	mouse_holder.has_card = true
+	
 
 func remove_card_from_mouse_holder(forced : bool) -> Node2D:
 	if mouse_holder.get_child_count() > 0:
@@ -60,5 +65,12 @@ func remove_card_from_mouse_holder(forced : bool) -> Node2D:
 		return current_child
 	return null
 	
-
-
+func set_initial_card(card : Sprite2D):
+		card.in_meld = false
+		self.add_child(card,0)
+		card.global_position = current_offset
+		current_offset += starting_offset
+		
+func reset_offsets():
+	current_offset = starting_pos
+	starting_offset = Vector2(50,0)

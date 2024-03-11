@@ -39,9 +39,6 @@ func get_meld_string(meld : MELD_TYPE) -> String:
 #Validate if the cards selected can equal a meld that is needed
 func get_selected_cards():
 	var selected_cards = get_tree().get_nodes_in_group("selected")
-	
-	sort_cards_for_run(selected_cards)
-
 
 func check_for_meld(cards : Array, meld_type : MELD_TYPE)-> bool:
 	#Check if there is a set
@@ -64,21 +61,57 @@ func check_for_meld(cards : Array, meld_type : MELD_TYPE)-> bool:
 	if meld_type == MELD_TYPE.RUN or meld_type == MELD_TYPE.RUN_OF_7:
 		var run_suit = null
 		var run_cnt = 0
+		var current_num = null
+		var direction = null
+		var offset = 0
 		for card in cards:
-			if card.card.number == 2:
-				run_cnt += 1
-			elif run_suit == null:
-				run_suit = card.card.suit
-				run_cnt += 1
-			elif run_suit == card.card.suit:
-				run_cnt += 1
-			elif run_suit != card.card.suit:
-				return false
-		
-		sort_cards_for_run(cards)
-		for card in cards:
-			print(card.card)
 			
+			#If suit does not equal return false
+			if run_suit != null and card.card.suit != run_suit and direction != null and card.card.number != 2:
+				return false
+			#If number does not equal the next number than return false
+			elif run_suit != null and card.card.number != null and direction != null and card.card.number != 2:
+				#If the current number is a king and the next number is not an ace and we are going up then return false
+				if current_num == 13 and card.card.number != 1 and direction == 1:
+					return false
+				#If the current number is a 2 and the next number is an ace and we are going down then return false
+				elif current_num == 2 and card.card.number != 1 and direction == -1:
+					return false
+				#If the current number is not going in the right direction return false
+				elif current_num + direction != card.card.number:
+					return false
+			elif direction == null and current_num != null and run_suit != null and card.card.number != 2:
+				#Identify the direction
+				if current_num == 13 and card.card.number == 1:
+					direction = 1
+				elif card.card.number > current_num:
+					direction = 1
+				elif card.card.number < current_num:
+					direction = -1
+				else:
+					return false
+				#Identify if valid
+				if current_num + direction + offset != card.card.number:
+					return false
+			
+			#If two then check direction to update current number
+			if card.card.number == 2:
+				if direction == 1:
+					current_num += 1
+				elif direction == -1:
+					current_num -= 1
+				else:
+					offset += 1				
+				run_cnt+= 1
+			else:
+				run_suit = card.card.suit
+				current_num = card.card.number
+				run_cnt += 1
+			
+			if run_suit != null:
+				print(str(run_suit) + " - " + str(current_num) + " Count = " + str(run_cnt))
+		
+		
 		#Check if they have a valid run
 		if meld_type == MELD_TYPE.RUN and run_cnt >= 4:
 			return true
@@ -87,41 +120,3 @@ func check_for_meld(cards : Array, meld_type : MELD_TYPE)-> bool:
 
 	return false
 
-
-#Sort Array for Run
-func _compare_cards(a, b) -> bool:
-	return a.card.number < b.card.number
-
-
-func sort_cards_for_run(current_array : Array) -> Array:
-	var new_array : Array = []
-	var cards = current_array
-	#Sort them by number using compare cards
-	cards.sort_custom(_compare_cards)
-	#Get indexes for two's and aces
-	var two_array = []
-	var ace_array = []
-	for index in range(cards.size()-1):
-		if cards[index].card.number == 2:
-			two_array.append(cards.pop_at(index))
-		if cards[index].card.number == 1:
-			ace_array.append(cards.pop_at(index))
-	print("No 2's should exist: ")
-
-
-	#Loop through the array, and move the index of a two if the previous card has a gap
-	var previous_num = null
-	var nIndex = 0
-	for card in cards:
-		if previous_num == null:
-			pass
-		elif previous_num != card.card.number-1 and two_array.size() > 0:
-			new_array.append(two_array.pop_front())
-			
-		new_array.append(card)
-		previous_num = card.card.number
-		nIndex+=1
-	for c in new_array:
-		print(c.card)
-		
-	return new_array
