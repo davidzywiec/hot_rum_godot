@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://77b3atmdtrtv"]
+[gd_scene load_steps=7 format=3 uid="uid://77b3atmdtrtv"]
 
 [ext_resource type="Script" path="res://Scenes/Meld/meld_drop_off.gd" id="1_8lefd"]
-[ext_resource type="Texture2D" uid="uid://dkfta5iknms2b" path="res://Scenes/CardZone/set_area.png" id="1_hwqx5"]
 [ext_resource type="PackedScene" uid="uid://tdwxkqtswnnj" path="res://Scenes/Card/card.tscn" id="2_qbs6k"]
+[ext_resource type="Script" path="res://Scenes/Meld/MeldCardArea.gd" id="3_vhtr2"]
 [ext_resource type="Script" path="res://Scenes/MouseHolder.gd" id="4_1ujow"]
+[ext_resource type="Texture2D" uid="uid://dnjvnpgvrrrt3" path="res://Card Assets/discard_card.png" id="4_70n7v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wulfn"]
+size = Vector2(100, 141)
 
 [node name="MeldDropOff" type="Node2D"]
 script = ExtResource("1_8lefd")
@@ -11,34 +15,49 @@ script = ExtResource("1_8lefd")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 
-[node name="Card2D3" parent="." instance=ExtResource("2_qbs6k")]
-position = Vector2(253, 134)
+[node name="2Hearts" parent="." instance=ExtResource("2_qbs6k")]
+position = Vector2(331, 239)
 scale = Vector2(1, 1)
 create_fake_card = true
 fake_card_suit = 1
 
-[node name="Card2D" parent="." instance=ExtResource("2_qbs6k")]
-z_index = 1
-position = Vector2(272, 115)
+[node name="2Spades" parent="." instance=ExtResource("2_qbs6k")]
+position = Vector2(331, 239)
 scale = Vector2(1, 1)
 create_fake_card = true
 fake_card_suit = 0
-order = 2
 
-[node name="Card2D2" parent="." instance=ExtResource("2_qbs6k")]
-z_index = 2
-position = Vector2(230, 95)
+[node name="6Spades" parent="." instance=ExtResource("2_qbs6k")]
+position = Vector2(679, 242)
 scale = Vector2(1, 1)
 create_fake_card = true
 fake_card_number = 6
 fake_card_suit = 0
 order = 3
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="MeldCardArea" type="Area2D" parent="."]
+position = Vector2(73, 428)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("3_vhtr2")
+meld_offset = Vector2(25, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-position = Vector2(1260, 273)
-texture = ExtResource("1_hwqx5")
+[node name="Open Slot" type="Sprite2D" parent="MeldCardArea"]
+texture = ExtResource("4_70n7v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeldCardArea"]
+visible = false
+shape = SubResource("RectangleShape2D_wulfn")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="StartingPos" type="Node2D" parent="MeldCardArea"]
+
+[node name="CancelBtn" type="Button" parent="MeldCardArea"]
+offset_left = -54.0
+offset_top = -80.0
+offset_right = -36.0
+offset_bottom = -49.0
+text = "X"
 
 [node name="MouseHolder" type="Node2D" parent="."]
 script = ExtResource("4_1ujow")

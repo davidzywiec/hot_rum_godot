@@ -2,14 +2,17 @@ extends Node2D
 
 @onready var card_scene_prefab = "res://Scenes/Card/card.tscn"
 @onready var mouse_holder : Node2D = $MouseHolder
+@onready var test_meld : Area2D = $MeldCardArea
+
+
 
 func _ready():
-	pass
+	test_meld.area_entered.connect(test_meld.entered_meld_card)
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
 		if mouse_holder.has_card:
-			remove_card_from_mouse_holder()
+			remove_card_from_mouse_holder(false)
 		else:
 			var overlapping_sprites : Array = get_overlapping_sprites(event.position)
 			overlapping_sprites.sort_custom(_sort_sprites_by_zindex)
@@ -27,7 +30,6 @@ func get_overlapping_sprites(event_position) -> Array:
 		#print("Sprite Rect: Position =", node.position, "Size =", node.texture.get_size())
 		if node.get_rect().has_point(node.to_local(event_position)):
 			overlapping_sprites.append(node)
-			print(node)
 
 	return overlapping_sprites
 
@@ -37,16 +39,26 @@ func _sort_sprites_by_zindex(a, b):
 
 #Add the card to the mouseholder
 func add_card_to_mouse_holder(card_node):
-	self.remove_child(card_node)
+	if card_node.get_parent():
+		var par = card_node.get_parent()
+		par.remove_child(card_node)
 	mouse_holder.add_child(card_node)
 	card_node.set_position(Vector2.ZERO)
 	mouse_holder.has_card = true
 
-func remove_card_from_mouse_holder():
-	var current_child = mouse_holder.get_child(0)
-	var new_pos = mouse_holder.position
-	mouse_holder.remove_child(current_child)
-	self.add_child(current_child)
-	current_child.position = new_pos
-	mouse_holder.has_card = false
+func remove_card_from_mouse_holder(forced : bool) -> Node2D:
+	if mouse_holder.get_child_count() > 0:
+		var current_child = mouse_holder.get_child(0)
+		mouse_holder.remove_child(current_child)	
+
+		if !forced:	
+			var new_pos = mouse_holder.position
+			self.add_child(current_child)
+			current_child.position = new_pos
+
+		mouse_holder.has_card = false
+		return current_child
+	return null
 	
+
+

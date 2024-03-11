@@ -1,0 +1,9 @@
+{
+    "launch": {
+        "configurations": [],
+        "compounds": []
+    },
+    "godotTools.lsp.serverPort": 6005,
+    "godotTools.inlayHints.gdscript": true,
+    "godotTools.editor.verbose": true
+}

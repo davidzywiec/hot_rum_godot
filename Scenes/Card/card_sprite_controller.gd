@@ -5,6 +5,7 @@ var card : Card
 @export var fake_card_number = 2
 @export var fake_card_suit = Card.Suit.diamonds
 @export var order = 1
+var in_meld = false
 
 func _ready():
 	if create_fake_card:
