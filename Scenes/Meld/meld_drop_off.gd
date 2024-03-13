@@ -83,11 +83,11 @@ func validate_all_melds():
 
 func find_melds():
 	print(get_tree().get_nodes_in_group("meldArea"))
-	for area in get_tree().get_nodes_in_group("meldArea"):
-		print("Connecting meld " + area.name)
-		melds.append(area)
+	for node in get_tree().get_nodes_in_group("meldArea"):
+		melds.append(node)
 		connect_melds()
 
 func connect_melds():
-	for area in melds:
-		area.area_entered.connect(area.entered_meld_card)
+	for node in melds:
+		if not node.area.area_entered.is_connected(node.area.entered_meld_card):
+			node.area.area_entered.connect(node.area.entered_meld_card)

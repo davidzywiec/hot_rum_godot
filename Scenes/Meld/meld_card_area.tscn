@@ -4,18 +4,19 @@
 [ext_resource type="Texture2D" uid="uid://dnjvnpgvrrrt3" path="res://Card Assets/discard_card.png" id="2_acyfs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wulfn"]
-size = Vector2(100, 141)
+size = Vector2(99, 141)
 
-[node name="MeldCardArea" type="Area2D" groups=["meldArea"]]
-collision_layer = 4
-collision_mask = 4
+[node name="MeldCardArea" type="Node2D" groups=["meldArea"]]
 script = ExtResource("1_36kxv")
 meld_type = 2
 
-[node name="Open Slot" type="Sprite2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Open Slot" type="Sprite2D" parent="Area2D"]
 texture = ExtResource("2_acyfs")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_wulfn")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
@@ -28,7 +29,7 @@ offset_right = -39.0
 offset_bottom = -72.0
 text = "X"
 
-[node name="ValidLbl" type="RichTextLabel" parent="."]
+[node name="ValidLabel" type="RichTextLabel" parent="."]
 visible = false
 offset_left = -31.0
 offset_top = -98.0
@@ -36,3 +37,13 @@ offset_right = 9.0
 offset_bottom = -58.0
 theme_override_colors/default_color = Color(0, 0.886275, 0, 1)
 text = "Valid"
+
+[node name="MeldLabel" type="RichTextLabel" parent="."]
+offset_left = -49.0
+offset_top = 74.0
+offset_right = 51.0
+offset_bottom = 100.0
+bbcode_enabled = true
+text = "[center]This is some centered text[/center]"
+fit_content = true
+scroll_active = false

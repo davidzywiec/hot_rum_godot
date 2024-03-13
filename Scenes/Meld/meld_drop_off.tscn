@@ -13,9 +13,11 @@ position = Vector2(960, 540)
 
 [node name="MeldCardArea" parent="." instance=ExtResource("2_olrdg")]
 position = Vector2(80, 500)
+meld_type = 0
 
 [node name="MeldCardArea2" parent="." instance=ExtResource("2_olrdg")]
-position = Vector2(72, 676)
+position = Vector2(958, 500)
+meld_type = 1
 
 [node name="MouseHolder" type="Node2D" parent="."]
 script = ExtResource("4_1ujow")
@@ -76,3 +78,9 @@ create_fake_card = true
 fake_card_number = 7
 fake_card_suit = 0
 order = 3
+
+[node name="firstMeldPos" type="Node2D" parent="."]
+position = Vector2(80, 500)
+
+[node name="secondMeldPos" type="Node2D" parent="."]
+position = Vector2(958, 500)

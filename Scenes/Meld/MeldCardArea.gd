@@ -1,7 +1,9 @@
-extends Area2D
+extends Node2D
 
 @onready var cancel_btn : Button = $CancelBtn
-@onready var valid_lbl : RichTextLabel = $ValidLbl
+@onready var valid_lbl : RichTextLabel = $ValidLabel
+@onready var meld_lbl : RichTextLabel = $MeldLabel
+@onready var area : Area2D = $Area2D
 
 @export var meld_offset : Vector2 = Vector2(50,0)
 var current_offset : Vector2 = Vector2.ZERO 
@@ -11,6 +13,8 @@ var cards = []
 
 func _ready():
 	cancel_btn.pressed.connect(cancel_meld)
+	meld_lbl.text = "[center]"+ GlobalController.get_meld_string(meld_type)+"[/center]"
+
 
 func entered_meld_card(_area : Area2D):
 	if !get_parent():
@@ -18,7 +22,7 @@ func entered_meld_card(_area : Area2D):
 		return
 	var entered_card = get_parent().remove_card_from_mouse_holder(true)
 	if entered_card and entered_card.in_meld == false:
-		self.add_child(entered_card,0)
+		call_deferred("add_child",entered_card,0)
 		entered_card.set_position(starting_pos + current_offset)
 		current_offset += meld_offset
 		entered_card.in_meld = true
