@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var card_scene_prefab = "res://Scenes/Card/card.tscn"
 @onready var mouse_holder : Node2D = $MouseHolder
-@onready var test_meld : Area2D = $MeldCardArea
+var melds = []
 
 @onready var starting_pos : Vector2 = $ResetPos.position
 @export var starting_offset : Vector2 = Vector2(50,0)
@@ -10,8 +10,8 @@ var current_offset : Vector2 = Vector2.ZERO
 
 
 func _ready():
-	test_meld.area_entered.connect(test_meld.entered_meld_card)
 	current_offset = starting_pos
+	find_melds()
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
@@ -72,5 +72,22 @@ func set_initial_card(card : Sprite2D):
 		current_offset += starting_offset
 		
 func reset_offsets():
-	current_offset = starting_pos
-	starting_offset = Vector2(50,0)
+	#current_offset = starting_pos
+	#starting_offset = Vector2(50,0)
+	pass
+
+#Send validation to global controller on all melds
+func validate_all_melds():
+	pass
+
+
+func find_melds():
+	print(get_tree().get_nodes_in_group("meldArea"))
+	for area in get_tree().get_nodes_in_group("meldArea"):
+		print("Connecting meld " + area.name)
+		melds.append(area)
+		connect_melds()
+
+func connect_melds():
+	for area in melds:
+		area.area_entered.connect(area.entered_meld_card)

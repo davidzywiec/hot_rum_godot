@@ -14,6 +14,7 @@ func _ready():
 
 func entered_meld_card(_area : Area2D):
 	if !get_parent():
+		print("No Parent found on card")
 		return
 	var entered_card = get_parent().remove_card_from_mouse_holder(true)
 	if entered_card and entered_card.in_meld == false:

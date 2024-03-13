@@ -9,6 +9,16 @@ signal start_game_signal
 var round_index = -1
 var round_card_number = [7,8,9,10,11,11,12,13]
 var new_scene : PackedScene = load("res://Scenes/CardZone/card_zone.tscn")
+var round_place_conditions = [
+	[MELD_TYPE.SET, MELD_TYPE.SET],
+	[MELD_TYPE.SET, MELD_TYPE.RUN],
+	[MELD_TYPE.RUN, MELD_TYPE.RUN],
+	[MELD_TYPE.SET, MELD_TYPE.SET, MELD_TYPE.SET],
+	[MELD_TYPE.SET, MELD_TYPE.RUN_OF_7],
+	[MELD_TYPE.SET, MELD_TYPE.SET, MELD_TYPE.RUN],
+	[MELD_TYPE.SET, MELD_TYPE.RUN, MELD_TYPE.RUN],
+	[MELD_TYPE.RUN, MELD_TYPE.RUN, MELD_TYPE.RUN]
+	]
 
 #Discard Data
 var discard_pile : Array = []
@@ -33,13 +43,13 @@ func clear_requests():
 
 #Get meld string
 func get_meld_string(meld : MELD_TYPE) -> String:
-	return meld_type_string[meld]
-	
+	return meld_type_string[meld]	
 
 #Validate if the cards selected can equal a meld that is needed
 func get_selected_cards():
 	var selected_cards = get_tree().get_nodes_in_group("selected")
 
+#Check if a meld is valid
 func check_for_meld(cards : Array, meld_type : MELD_TYPE)-> bool:
 	#Check if there is a set
 	if meld_type == MELD_TYPE.SET:
@@ -120,3 +130,6 @@ func check_for_meld(cards : Array, meld_type : MELD_TYPE)-> bool:
 
 	return false
 
+#Validate if all the melds together are valid
+func validate_place_conditions():
+	var melds_needed = round_place_conditions[round_index]
