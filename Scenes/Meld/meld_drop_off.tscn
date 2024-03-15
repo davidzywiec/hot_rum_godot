@@ -11,76 +11,44 @@ script = ExtResource("1_8lefd")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 
+[node name="OrganizeButton" type="Button" parent="."]
+offset_right = 132.0
+offset_bottom = 57.0
+text = "Organize Cards"
+
+[node name="CancelButton" type="Button" parent="."]
+offset_top = 62.0
+offset_right = 132.0
+offset_bottom = 119.0
+text = "Cancel"
+
 [node name="MeldCardArea" parent="." instance=ExtResource("2_olrdg")]
-position = Vector2(80, 500)
+position = Vector2(80, 250)
 meld_type = 0
 
 [node name="MeldCardArea2" parent="." instance=ExtResource("2_olrdg")]
-position = Vector2(958, 500)
+position = Vector2(80, 500)
+meld_type = 1
+
+[node name="MeldCardArea3" parent="." instance=ExtResource("2_olrdg")]
+position = Vector2(80, 750)
 meld_type = 1
 
 [node name="MouseHolder" type="Node2D" parent="."]
 script = ExtResource("4_1ujow")
 
 [node name="ResetPos" type="Node2D" parent="."]
-position = Vector2(83, 85)
-
-[node name="2Hearts" parent="." instance=ExtResource("2_qbs6k")]
-position = Vector2(62, 94)
-scale = Vector2(1, 1)
-create_fake_card = true
-fake_card_suit = 1
-
-[node name="2Spades" parent="." instance=ExtResource("2_qbs6k")]
-position = Vector2(210, 102)
-scale = Vector2(1, 1)
-create_fake_card = true
-fake_card_suit = 0
-
-[node name="2Spades4" parent="." instance=ExtResource("2_qbs6k")]
-position = Vector2(210, 102)
-scale = Vector2(1, 1)
-create_fake_card = true
-fake_card_suit = 0
-
-[node name="2Spades5" parent="." instance=ExtResource("2_qbs6k")]
-position = Vector2(210, 102)
-scale = Vector2(1, 1)
-create_fake_card = true
-fake_card_suit = 0
-
-[node name="2Spades2" parent="." instance=ExtResource("2_qbs6k")]
-position = Vector2(210, 102)
-scale = Vector2(1, 1)
-create_fake_card = true
-fake_card_number = 3
-fake_card_suit = 0
-
-[node name="2Spades3" parent="." instance=ExtResource("2_qbs6k")]
-position = Vector2(210, 102)
-scale = Vector2(1, 1)
-create_fake_card = true
-fake_card_number = 4
-fake_card_suit = 1
-
-[node name="6Spades" parent="." instance=ExtResource("2_qbs6k")]
-position = Vector2(385, 98)
-scale = Vector2(1, 1)
-create_fake_card = true
-fake_card_number = 6
-fake_card_suit = 0
-order = 3
-
-[node name="7Spades" parent="." instance=ExtResource("2_qbs6k")]
-position = Vector2(385, 98)
-scale = Vector2(1, 1)
-create_fake_card = true
-fake_card_number = 7
-fake_card_suit = 0
-order = 3
+position = Vector2(826, 85)
 
 [node name="firstMeldPos" type="Node2D" parent="."]
-position = Vector2(80, 500)
+position = Vector2(80, 250)
 
 [node name="secondMeldPos" type="Node2D" parent="."]
-position = Vector2(958, 500)
+position = Vector2(80, 500)
+
+[node name="secondMeldPos2" type="Node2D" parent="."]
+position = Vector2(80, 750)
+
+[node name="Card2D" parent="." instance=ExtResource("2_qbs6k")]
+position = Vector2(786, 306)
+create_fake_card = true

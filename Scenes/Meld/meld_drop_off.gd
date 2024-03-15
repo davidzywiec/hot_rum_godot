@@ -8,8 +8,15 @@ var melds = []
 @export var starting_offset : Vector2 = Vector2(50,0)
 var current_offset : Vector2 = Vector2.ZERO 
 
+@onready var organize_btn : Button = $OrganizeButton
+@onready var cancel_btn : Button = $CancelButton
+@onready var sceneManager = get_tree().get_first_node_in_group("SceneManager")
+
+
 
 func _ready():
+	organize_btn.pressed.connect(organize_cards)
+	cancel_btn.pressed.connect(cancel_drop_off)
 	current_offset = starting_pos
 	find_melds()
 
@@ -67,27 +74,39 @@ func remove_card_from_mouse_holder(forced : bool) -> Node2D:
 	
 func set_initial_card(card : Sprite2D):
 		card.in_meld = false
-		self.add_child(card,0)
+		if card.get_parent() != self:
+			call_deferred("add_child",card,0)
 		card.global_position = current_offset
 		current_offset += starting_offset
 		
 func reset_offsets():
-	#current_offset = starting_pos
-	#starting_offset = Vector2(50,0)
-	pass
+	current_offset = starting_pos
+	starting_offset = Vector2(50,0)
 
 #Send validation to global controller on all melds
 func validate_all_melds():
 	pass
 
+#Reset the cards into a line
+func organize_cards():
+	reset_offsets()
+	#Find all selectable cards and set them with set initial card logic
+	for card in get_tree().get_nodes_in_group("selectable_card"):
+		if !card.in_meld:
+			set_initial_card(card)
+
 
 func find_melds():
-	print(get_tree().get_nodes_in_group("meldArea"))
+	#print(get_tree().get_nodes_in_group("meldArea"))
 	for node in get_tree().get_nodes_in_group("meldArea"):
 		melds.append(node)
-		connect_melds()
 
-func connect_melds():
-	for node in melds:
-		if not node.area.area_entered.is_connected(node.area.entered_meld_card):
-			node.area.area_entered.connect(node.area.entered_meld_card)
+func add_cards_to_scene(cards : Array):
+	print("Add cards to scene")
+
+func cancel_drop_off():
+	sceneManager.move_to_prior_scene(false)
+
+func refresh_cards():
+	#TODO: Need to refresh the cards from global controller
+	print("Refresh cards called!")

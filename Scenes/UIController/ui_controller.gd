@@ -10,6 +10,7 @@ extends Control
 var discard_button : Button
 @onready var panel_container: PanelContainer = $MarginContainer/PanelContainer
 @onready var card_table_button : Button = $CardTableButton
+@onready var meld_area_button : Button = $MeldAreaButton
 #Pickup Rules
 @onready var pu_non_turn_rule : Label = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/PickupCardOutOfTurn
 @onready var pu_turn_rule : Label = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/PickupCardOnTurn
@@ -26,6 +27,10 @@ var discard_button : Button
 @export var current_player_color : Color = Color.GREEN
 @onready var cardTableScene : PackedScene = preload("res://Scenes/CardTable/card_table.tscn")
 var card_table_node : Node2D
+
+@onready var meldDropOffScene : PackedScene = preload("res://Scenes/Meld/meld_drop_off.tscn")
+var meld_drop_off : Node2D
+
 @onready var sceneManager = get_tree().get_first_node_in_group("SceneManager")
 
 var player_index : int = 0
@@ -43,6 +48,9 @@ func _ready():
 	discard_button = discard_area.get_node("ConfirmDiscard")
 	if discard_button:
 		discard_button.pressed.connect(discard_card)
+	if meld_area_button:
+		meld_area_button.pressed.connect(move_to_meld_area)
+	
 
 
 # Called when the node enters the scene tree for the first time.
@@ -174,3 +182,12 @@ func move_to_card_table():
 		card_table_node = cardTableScene.instantiate()
 		
 	sceneManager.move_to_next_level(card_table_node, false)
+
+func move_to_meld_area():
+	print("Move to meld area")
+	if !meld_drop_off:
+		meld_drop_off = meldDropOffScene.instantiate()
+	else:
+		meld_drop_off.refresh_cards()
+		
+	sceneManager.move_to_next_level(meld_drop_off, false)

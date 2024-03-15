@@ -14,6 +14,7 @@ var cards = []
 func _ready():
 	cancel_btn.pressed.connect(cancel_meld)
 	meld_lbl.text = "[center]"+ GlobalController.get_meld_string(meld_type)+"[/center]"
+	area.area_entered.connect(entered_meld_card)
 
 
 func entered_meld_card(_area : Area2D):
