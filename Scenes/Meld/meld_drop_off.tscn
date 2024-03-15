@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://77b3atmdtrtv"]
+[gd_scene load_steps=4 format=3 uid="uid://77b3atmdtrtv"]
 
 [ext_resource type="Script" path="res://Scenes/Meld/meld_drop_off.gd" id="1_8lefd"]
 [ext_resource type="PackedScene" uid="uid://c30jix3qxlf3k" path="res://Scenes/Meld/meld_card_area.tscn" id="2_olrdg"]
-[ext_resource type="PackedScene" uid="uid://tdwxkqtswnnj" path="res://Scenes/Card/card.tscn" id="2_qbs6k"]
 [ext_resource type="Script" path="res://Scenes/MouseHolder.gd" id="4_1ujow"]
 
 [node name="MeldDropOff" type="Node2D"]
@@ -48,7 +47,3 @@ position = Vector2(80, 500)
 
 [node name="secondMeldPos2" type="Node2D" parent="."]
 position = Vector2(80, 750)
-
-[node name="Card2D" parent="." instance=ExtResource("2_qbs6k")]
-position = Vector2(786, 306)
-create_fake_card = true
