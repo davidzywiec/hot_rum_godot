@@ -7,7 +7,6 @@
 size = Vector2(96, 138)
 
 [node name="Card2D" type="Sprite2D" groups=["selectable_card"]]
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_svdjr")
 script = ExtResource("1_7rjjv")
 

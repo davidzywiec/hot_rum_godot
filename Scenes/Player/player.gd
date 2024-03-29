@@ -23,6 +23,7 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	if is_player:
 		DataController.player_index = player_index
+		DataController.player_hand = hand
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

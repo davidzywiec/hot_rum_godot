@@ -11,6 +11,7 @@ var current_offset : Vector2 = Vector2.ZERO
 @onready var organize_btn : Button = $OrganizeButton
 @onready var cancel_btn : Button = $CancelButton
 @onready var sceneManager = get_tree().get_first_node_in_group("SceneManager")
+var cards = []
 
 
 
@@ -19,6 +20,7 @@ func _ready():
 	cancel_btn.pressed.connect(cancel_drop_off)
 	current_offset = starting_pos
 	find_melds()
+	refresh_cards()
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
@@ -101,12 +103,20 @@ func find_melds():
 	for node in get_tree().get_nodes_in_group("meldArea"):
 		melds.append(node)
 
-func add_cards_to_scene(cards : Array):
-	print("Add cards to scene")
+func add_card_to_scene(card : Card):
+	var card_sprite = card.sprite_card_scene.instantiate()
+	card_sprite.set_card(card)
+	set_initial_card(card_sprite)
 
 func cancel_drop_off():
 	sceneManager.move_to_prior_scene(false)
 
 func refresh_cards():
-	#TODO: Need to refresh the cards from global controller
-	print("Refresh cards called!")
+	for card in DataController.player_hand.card_array:
+		if card not in cards:
+			add_card_to_scene(card)
+			cards.append(card)
+
+	for card in cards:
+		if card not in DataController.player_hand.card_array:
+			card.queue_free()
