@@ -1,8 +1,7 @@
 extends Node2D
 
-@onready var card_scene_prefab = "res://Scenes/Card/card.tscn"
 @onready var mouse_holder : Node2D = $MouseHolder
-var melds = []
+
 
 @onready var starting_pos : Vector2 = $ResetPos.position
 @export var starting_offset : Vector2 = Vector2(50,0)
@@ -13,6 +12,11 @@ var current_offset : Vector2 = Vector2.ZERO
 @onready var sceneManager = get_tree().get_first_node_in_group("SceneManager")
 var cards = []
 
+var meld_area_prefab : PackedScene = preload("res://Scenes/Meld/meld_card_area.tscn")
+
+@export var meld_positions = []
+var created_melds = false
+var melds = []
 
 
 func _ready():
@@ -112,6 +116,7 @@ func cancel_drop_off():
 	sceneManager.move_to_prior_scene(false)
 
 func refresh_cards():
+	create_meld_areas()
 	for card in DataController.player_hand.card_array:
 		if card not in cards:
 			add_card_to_scene(card)
@@ -120,3 +125,23 @@ func refresh_cards():
 	for card in cards:
 		if card not in DataController.player_hand.card_array:
 			card.queue_free()
+	
+	
+
+
+func create_meld_areas():
+	var current_round = GlobalController.round_index
+	var melds_in_round = GlobalController.round_place_conditions[current_round]
+	var index = 0
+	for meld in melds_in_round:
+		var meld_instance = meld_area_prefab.instantiate()
+		meld_instance.set_meld_type(meld)
+		melds.append(meld_instance)
+		add_child(meld_instance)
+		meld_instance.global_position = meld_positions[index]
+		index+= 1
+
+
+
+	created_melds = true
+			

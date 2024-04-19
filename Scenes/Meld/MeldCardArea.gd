@@ -9,7 +9,13 @@ extends Node2D
 var current_offset : Vector2 = Vector2.ZERO 
 @onready var starting_pos : Vector2 = $StartingPos.position
 var cards = []
-@export var meld_type = GlobalController.MELD_TYPE.SET
+@export var meld_type = GlobalController.MELD_TYPE.SET : 
+	get : 
+		return meld_type
+	set(value) :
+		print("Set meld_type" + GlobalController.get_meld_string(meld_type))
+		meld_type = value
+
 
 func _ready():
 	cancel_btn.pressed.connect(cancel_meld)
@@ -60,3 +66,6 @@ func cancel_meld():
 func get_meld():
 	for card in cards:
 		print(card.card)
+
+func set_meld_type(new_meld_type : GlobalController.MELD_TYPE):
+	set("meld_type",new_meld_type)

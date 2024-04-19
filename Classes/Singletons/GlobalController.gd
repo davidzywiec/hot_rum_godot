@@ -18,7 +18,7 @@ var round_place_conditions = [
 	[MELD_TYPE.SET, MELD_TYPE.SET, MELD_TYPE.RUN],
 	[MELD_TYPE.SET, MELD_TYPE.RUN, MELD_TYPE.RUN],
 	[MELD_TYPE.RUN, MELD_TYPE.RUN, MELD_TYPE.RUN]
-	]
+]
 
 #Discard Data
 var discard_pile : Array = []

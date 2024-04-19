@@ -8,7 +8,6 @@ size = Vector2(99, 141)
 
 [node name="MeldCardArea" type="Node2D" groups=["meldArea"]]
 script = ExtResource("1_36kxv")
-meld_type = 2
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 5

@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://77b3atmdtrtv"]
+[gd_scene load_steps=3 format=3 uid="uid://77b3atmdtrtv"]
 
 [ext_resource type="Script" path="res://Scenes/Meld/meld_drop_off.gd" id="1_8lefd"]
-[ext_resource type="PackedScene" uid="uid://c30jix3qxlf3k" path="res://Scenes/Meld/meld_card_area.tscn" id="2_olrdg"]
 [ext_resource type="Script" path="res://Scenes/MouseHolder.gd" id="4_1ujow"]
 
 [node name="MeldDropOff" type="Node2D"]
 script = ExtResource("1_8lefd")
+meld_positions = [Vector2(80, 250), Vector2(80, 500), Vector2(80, 750)]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
@@ -20,18 +20,6 @@ offset_top = 62.0
 offset_right = 132.0
 offset_bottom = 119.0
 text = "Cancel"
-
-[node name="MeldCardArea" parent="." instance=ExtResource("2_olrdg")]
-position = Vector2(80, 250)
-meld_type = 0
-
-[node name="MeldCardArea2" parent="." instance=ExtResource("2_olrdg")]
-position = Vector2(80, 500)
-meld_type = 1
-
-[node name="MeldCardArea3" parent="." instance=ExtResource("2_olrdg")]
-position = Vector2(80, 750)
-meld_type = 1
 
 [node name="MouseHolder" type="Node2D" parent="."]
 script = ExtResource("4_1ujow")
